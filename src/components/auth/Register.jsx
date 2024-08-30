@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { API_URL } from '../../API_URL';
 import ReCAPTCHA from 'react-google-recaptcha';
 import '../../css/forms.css';
@@ -21,6 +22,8 @@ const Register = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [recaptchaValue, setRecaptchaValue] = useState('');
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const {
     name,
@@ -65,10 +68,19 @@ const Register = () => {
           answer2,
         });
 
-        localStorage.setItem('token', response.data.token); // Save token to localStorage
+        // Assuming the response contains these values
+        const { token, userType, user_id } = response.data;
+
+        // Save token, userType, and user_id to localStorage
+        localStorage.setItem('token', token);
+        localStorage.setItem('userType', userType);
+        localStorage.setItem('user_id', user_id);
 
         setSuccess('Registration successful!');
         setError('');
+
+        // Redirect to the signin page after successful registration
+        navigate('/login');
       } catch (err) {
         setError(err.response.data.errors.map((e) => e.msg).join(', '));
         setSuccess('');
@@ -166,7 +178,7 @@ const Register = () => {
                     value="Register"
                   />
                   <p className="forgot" style={{ color: 'black' }}>
-                    Already have an account? <a href="/login">Sign In</a>
+                    Already have an account? <Link to="/login">Sign In</Link>
                   </p>
                 </form>
                 {error && <p style={{ color: 'red' }}>{error}</p>}

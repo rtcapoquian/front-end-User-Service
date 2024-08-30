@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../api";
 
 const AddEvent = () => {
@@ -9,10 +9,11 @@ const AddEvent = () => {
     address: "",
     longitude: "",
     latitude: "",
-    Age: "", // Changed from age to Age
+    Age: "",
     pay: "",
-    Capacity: "", // Changed from capacity to Capacity
-    Details: "", // Changed from details to Details
+    Capacity: "",
+    Details: "",
+    organizer: "", // Added field for organizer ID
   });
 
   const [loading, setLoading] = useState(false);
@@ -26,11 +27,22 @@ const AddEvent = () => {
     address,
     longitude,
     latitude,
-    Age, // Changed from age to Age
+    Age,
     pay,
-    Capacity, // Changed from capacity to Capacity
-    Details, // Changed from details to Details
+    Capacity,
+    Details,
+    organizer,
   } = formData;
+
+  useEffect(() => {
+    const storedorganizer = localStorage.getItem("user_id");
+    if (storedorganizer) {
+      setFormData((prevState) => ({
+        ...prevState,
+        organizer: storedorganizer,
+      }));
+    }
+  }, []);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,14 +55,14 @@ const AddEvent = () => {
       const response = await api.post("/api/events", formData);
       console.log("Response:", response.data);
       setSuccessMessage("Event added successfully!");
-      setErrorMessage(""); // Clear any previous error message
+      setErrorMessage("");
     } catch (error) {
       console.error(
         "Error:",
         error.response ? error.response.data : error.message
       );
       setErrorMessage("Error adding event. Please try again.");
-      setSuccessMessage(""); // Clear any previous success message
+      setSuccessMessage("");
     } finally {
       setLoading(false);
     }
@@ -107,8 +119,6 @@ const AddEvent = () => {
           required
         />
         <select name="Age" value={Age} onChange={onChange} required>
-          {" "}
-          {/* Changed from age to Age */}
           <option value="">Select Age Restrictions</option>
           <option value="over_21">Over 21</option>
           <option value="over_18">Over 18</option>
@@ -121,14 +131,14 @@ const AddEvent = () => {
         <input
           type="number"
           placeholder="Max Capacity"
-          name="Capacity" // Changed from capacity to Capacity
-          value={Capacity} // Changed from capacity to Capacity
+          name="Capacity"
+          value={Capacity}
           onChange={onChange}
         />
         <textarea
-          name="Details" // Changed from details to Details
+          name="Details"
           placeholder="Additional Details"
-          value={Details} // Changed from details to Details
+          value={Details}
           onChange={onChange}
           rows="5"
         />
