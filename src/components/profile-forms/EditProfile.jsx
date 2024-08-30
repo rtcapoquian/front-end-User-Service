@@ -199,6 +199,9 @@ const EditProfile = () => {
             <input type="submit" value="Save" />
           </div>
         </form>
+        <button type="button" onClick={() => window.history.back()}>
+          Go Back
+        </button>
       </div>
     </section>
   );
