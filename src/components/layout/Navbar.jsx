@@ -16,17 +16,20 @@ const Navbar = () => {
 
   const organizerLinks = (
     <ul>
-      <li><Link to="/posts">PlayGround</Link></li>
-      <li><Link to="/chatscreen">Chat</Link></li>
+      <li>
+        <Link to="/posts">PlayGround</Link>
+      </li>
+      <li>
+        <Link to="/chatscreen">Chat</Link>
+      </li>
       <li>
         <div className="dropdown">
           <button className="dropdown-toggle">Menu</button>
-          <div className="dropdown-menu">
-            <Link to="/dashboardOrg">My Profile</Link>
-            <Link to="/faqs">FAQ</Link>
-            <Link to="/terms">Terms</Link>
-            <button onClick={logout}>Logout</button>
-          </div>
+
+          <Link to="/dashboardOrg">My Profile</Link>
+          <Link to="/faqs">FAQ</Link>
+          <Link to="/terms">Terms</Link>
+          <button onClick={logout}>Logout</button>
         </div>
       </li>
     </ul>
@@ -34,9 +37,15 @@ const Navbar = () => {
 
   const authLinks = (
     <ul>
-      <li><Link to="/posts">PlayGround</Link></li>
-      <li><Link to="/landingpage">Dashboard</Link></li>
-      <li><Link to="/dashboard">Profile</Link></li>
+      <li>
+        <Link to="/posts">PlayGround</Link>
+      </li>
+      <li>
+        <Link to="/landingpage">Dashboard</Link>
+      </li>
+      <li>
+        <Link to="/dashboard">Profile</Link>
+      </li>
       <li>
         <div className="dropdown">
           <button className="dropdown-toggle">Discover</button>
@@ -64,7 +73,9 @@ const Navbar = () => {
 
   const guestLinks = (
     <ul>
-      <li><Link to="/">Home</Link></li>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
     </ul>
   );
 
@@ -75,7 +86,11 @@ const Navbar = () => {
           <span>Logo</span> {/* Replace with logo or text */}
         </Link>
       </div>
-      {!isAuthenticated ? guestLinks : userType === "Organizer" ? organizerLinks : authLinks}
+      {!isAuthenticated
+        ? guestLinks
+        : userType === "Organizer"
+        ? organizerLinks
+        : authLinks}
     </nav>
   );
 };

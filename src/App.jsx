@@ -21,6 +21,12 @@ import Profiles from "./components/profiles/Profiles";
 import Landing from "./components/layout/Landing";
 import DASHBOARDORG from "./components/dashboard/dashboardOrg";
 import Landingorg from "./components/dashboard/landingorg";
+//faq and terms
+import Faq from "./components/layout/faq";
+import Termsandpolicy from "./components/layout/termsandpolicy";
+//post
+import Posts from "./components/post/Posts";
+import Post from "./components/posts/Post";
 function App() {
   return (
     <>
@@ -38,6 +44,11 @@ function App() {
           <Route exact path="/addevent" element={<AddEvent />} />
           <Route exact path="/landingorg" element={<Landingorg />} />
           <Route exact path="/edit-profile" element={<EditProfile />} />
+          <Route exact path="/faqs" element={<Faq/>} /> 
+          <Route exact path="/terms" element={<Termsandpolicy/>} />
+          <Route exact path='/posts' element={<Posts />} />
+          <Route exact path='/posts/:id' element={<Post />} />
+          <Route exact path="/profile/:user_id" element={<Profiles />} />
         </Routes>
       </BrowserRouter>
     </>

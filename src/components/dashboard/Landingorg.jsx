@@ -98,6 +98,7 @@ export default class LandingOrg extends Component {
             </thead>
             <tbody>
               {events.map((event) => (
+                
                 <tr key={event._id}>
                   <td>{event.name}</td>
                   <td>Recreational</td>

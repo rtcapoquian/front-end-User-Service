@@ -2,7 +2,6 @@ import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { API_URL } from '../../API_URL';
-import ReCAPTCHA from 'react-google-recaptcha';
 import '../../css/forms.css';
 import '../../css/register.css';
 
@@ -21,7 +20,6 @@ const Register = () => {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [recaptchaValue, setRecaptchaValue] = useState('');
 
   const navigate = useNavigate(); // Initialize useNavigate
 
@@ -41,17 +39,8 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onRecaptchaChange = (value) => {
-    setRecaptchaValue(value);
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    if (!recaptchaValue) {
-      setError('Please validate the captcha.');
-      return;
-    }
 
     if (password !== password2) {
       setError('Passwords do not match.');
@@ -160,10 +149,6 @@ const Register = () => {
                     name="answer1"
                     value={answer1}
                     onChange={onChange}
-                  />
-                  <ReCAPTCHA
-                    sitekey="6Lev0rsUAAAAADYGVKiWUXrnCVAMmvzIL-lJ_7PM"
-                    onChange={onRecaptchaChange}
                   />
                   <input
                     type="submit"
