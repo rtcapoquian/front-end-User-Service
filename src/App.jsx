@@ -27,6 +27,18 @@ import Termsandpolicy from "./components/layout/termsandpolicy";
 //post
 import Posts from "./components/post/Posts";
 import Post from "./components/posts/Post";
+//landing page
+import LandingPage from "./components/dashboard/LandingPage";
+import Dashboard from "./components/dashboard/Dashboard";
+//registered event
+import RegisteredEvent from "./components/dashboard/RegisteredEvent";
+import Waitinglistevent from "./components/dashboard/Waitinglistevent";
+import SearchEvents from "./components/dashboard/SearchEvents";
+import EventInformation from "./components/dashboard/EventInformation";
+import Paymentevents from "./components/profile-forms/Paymentevents";
+import Confirmationpageevent from "./components/dashboard/Confirmationpageevent";
+import SearchPeople from "./components/dashboard/SearchPeople";
+import ProfileInformation from "./components/dashboard/ProfileInformation";
 function App() {
   return (
     <>
@@ -44,11 +56,30 @@ function App() {
           <Route exact path="/addevent" element={<AddEvent />} />
           <Route exact path="/landingorg" element={<Landingorg />} />
           <Route exact path="/edit-profile" element={<EditProfile />} />
-          <Route exact path="/faqs" element={<Faq/>} /> 
-          <Route exact path="/terms" element={<Termsandpolicy/>} />
-          <Route exact path='/posts' element={<Posts />} />
-          <Route exact path='/posts/:id' element={<Post />} />
+          <Route exact path="/faqs" element={<Faq />} />
+          <Route exact path="/terms" element={<Termsandpolicy />} />
+          <Route exact path="/posts" element={<Posts />} />
+          <Route exact path="/posts/:id" element={<Post />} />
           <Route exact path="/profile/:user_id" element={<Profiles />} />
+          <Route exact path="/landingpage" element={<LandingPage />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
+          {/* registeredevent */}
+          <Route
+            exact
+            path="/registerevent/:id"
+            element={<RegisteredEvent />}
+          />
+          <Route
+            exact
+            path="/waitinglistevent/:id"
+            element={<Waitinglistevent />}
+          />
+          <Route exact path="/SearchPeople" element={<SearchPeople />} />
+          <Route path="/gotoprofile/:id" element={<ProfileInformation />} />
+          <Route exact path="/SearchEvents" element={<SearchEvents />} />
+          <Route path="/edit/:id" element={<EventInformation />} />
+          <Route path="/payment/:id" element={<Paymentevents />} />
+          <Route path="/confi/:id" element={<Confirmationpageevent />} />
         </Routes>
       </BrowserRouter>
     </>
