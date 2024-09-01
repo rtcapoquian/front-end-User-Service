@@ -1,45 +1,45 @@
 import React, { useState, useEffect } from "react";
-import api from "../../api";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import api from "../../api"; // Adjust import if your API instance is named differently
+import MapComponent from "./MapComponent";
 
 const AddEvent = () => {
   const [formData, setFormData] = useState({
     name: "",
-    type: "",
     information: "",
     address: "",
     longitude: "",
     latitude: "",
-    Age: "",
-    pay: "",
-    Capacity: "",
-    Details: "",
-    organizer: "", // Added field for organizer ID
+    capacity: "", // Updated to match backend
+    details: "",
+    date: "",
+    time: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const {
     name,
-    type,
     information,
     address,
     longitude,
     latitude,
-    Age,
-    pay,
-    Capacity,
-    Details,
-    organizer,
+    capacity,
+    details,
+    date,
+    time,
   } = formData;
 
   useEffect(() => {
-    const storedorganizer = localStorage.getItem("user_id");
-    if (storedorganizer) {
+    const storedOrganizer = localStorage.getItem("user_id");
+    if (storedOrganizer) {
       setFormData((prevState) => ({
         ...prevState,
-        organizer: storedorganizer,
+        organizer: storedOrganizer,
       }));
     }
   }, []);
@@ -47,15 +47,31 @@ const AddEvent = () => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const onMapClick = ({ lat, lng }) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      latitude: lat,
+      longitude: lng,
+    }));
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      // Step 1: Create the event
       const response = await api.post("/api/events", formData);
-      console.log("Response:", response.data);
-      setSuccessMessage("Event added successfully!");
+      console.log("Event Response:", response.data);
+
+      // Step 2: Create a post with the event name and address
+      const postText = `Event: ${name} at ${address} on ${date} at ${time}`;
+      await api.post("/api/posts", { text: postText });
+
+      // Success messages and navigation
+      setSuccessMessage("Event and post added successfully!");
       setErrorMessage("");
+      navigate("/landingorg"); // Navigate to landingorg after success
     } catch (error) {
       console.error(
         "Error:",
@@ -70,24 +86,19 @@ const AddEvent = () => {
 
   return (
     <section>
-      <h1>Add Event or Venue</h1>
+      <h1>Add Event</h1>
       {loading && <p>Loading...</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       <form onSubmit={onSubmit}>
         <input
           type="text"
-          placeholder="* Event or Venue Name"
+          placeholder="* Event Name"
           name="name"
           value={name}
           onChange={onChange}
           required
         />
-        <select name="type" value={type} onChange={onChange} required>
-          <option value="">Select Type</option>
-          <option value="event">Event</option>
-          <option value="venue">Venue</option>
-        </select>
         <textarea
           name="information"
           placeholder="Event Description"
@@ -108,7 +119,7 @@ const AddEvent = () => {
           name="longitude"
           value={longitude}
           onChange={onChange}
-          required
+          readOnly
         />
         <input
           type="text"
@@ -116,37 +127,43 @@ const AddEvent = () => {
           name="latitude"
           value={latitude}
           onChange={onChange}
-          required
+          readOnly
         />
-        <select name="Age" value={Age} onChange={onChange} required>
-          <option value="">Select Age Restrictions</option>
-          <option value="over_21">Over 21</option>
-          <option value="over_18">Over 18</option>
-        </select>
-        <select name="pay" value={pay} onChange={onChange} required>
-          <option value="">Select Payment Type</option>
-          <option value="free">Free</option>
-          <option value="chargeable">Chargeable</option>
-        </select>
         <input
           type="number"
           placeholder="Max Capacity"
-          name="Capacity"
-          value={Capacity}
+          name="capacity"
+          value={capacity}
           onChange={onChange}
+          required
         />
         <textarea
-          name="Details"
+          name="details"
           placeholder="Additional Details"
-          value={Details}
+          value={details}
           onChange={onChange}
           rows="5"
+        />
+        <input
+          type="date"
+          name="date"
+          value={date}
+          onChange={onChange}
+          required
+        />
+        <input
+          type="time"
+          name="time"
+          value={time}
+          onChange={onChange}
+          required
         />
         <button type="submit">Submit</button>
         <button type="button" onClick={() => window.history.back()}>
           Go Back
         </button>
       </form>
+      <MapComponent onMapClick={onMapClick} />
     </section>
   );
 };

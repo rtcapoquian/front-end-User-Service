@@ -59,7 +59,7 @@ const Register = () => {
 
         // Assuming the response contains these values
         const { token, userType, user_id } = response.data;
-
+        
         // Save token, userType, and user_id to localStorage
         localStorage.setItem('token', token);
         localStorage.setItem('userType', userType);

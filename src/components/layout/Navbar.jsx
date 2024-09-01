@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -17,19 +17,35 @@ const Navbar = () => {
   const organizerLinks = (
     <ul>
       <li>
-        <Link to="/posts">PlayGround</Link>
+        <Link to="/dashboardOrg">Home</Link>
       </li>
       <li>
-        <Link to="/chatscreen">Chat</Link>
+        <Link to="/landingOrg">Events</Link>
+      </li>
+      <li>
+        <Link to="/edit-profile">Profile</Link>
+      </li>
+      <li>
+        <Link to="/posts">Forums</Link>
+      </li>
+      <li>
+        <Link to="/searchpeople">People</Link>
+      </li>
+      <li>
+        <Link to="/chat">Chat</Link>
       </li>
       <li>
         <div className="dropdown">
           <button className="dropdown-toggle">Menu</button>
-
-          <Link to="/dashboardOrg">My Profile</Link>
-          <Link to="/faqs">FAQ</Link>
-          <Link to="/terms">Terms</Link>
-          <button onClick={logout}>Logout</button>
+          <div className="dropdown-menu">
+            <Link to="/dashboardOrg">Home</Link>
+            <Link to="/landingOrg">Events</Link>
+            <Link to="/edit-profile">Profile</Link>
+            <Link to="/posts">Forums</Link>
+            <Link to="/searchpeople">People</Link>
+            <Link to="/chat">Chat</Link>
+            <button onClick={logout}>Logout</button>
+          </div>
         </div>
       </li>
     </ul>
@@ -37,38 +53,43 @@ const Navbar = () => {
 
   const authLinks = (
     <ul>
-      <li>
-        <Link to="/posts">PlayGround</Link>
-      </li>
-      <li>
-        <Link to="/landingpage">Dashboard</Link>
-      </li>
-      <li>
-        <Link to="/dashboard">Profile</Link>
-      </li>
-      <li>
-        <div className="dropdown">
-          <button className="dropdown-toggle">Discover</button>
-          <div className="dropdown-menu">
-            <Link to="/SearchVenue">Venues</Link>
-            <Link to="/chatscreen">Chat</Link>
-            <Link to="/SearchEvents">Events</Link>
-            <Link to="/SearchPeople">Around You</Link>
-          </div>
+    <li>
+      <Link to="/landingpage">Home</Link>
+    </li>
+    <li>
+      <Link to="/SearchEvents">Events</Link>
+    </li>
+    <li>
+      <Link to="/registeredEvents">Registration</Link>
+    </li>
+    <li>
+      <Link to="/edit-profile">Profile</Link>
+    </li>
+    <li>
+      <Link to="/posts">Forums</Link>
+    </li>
+    <li>
+      <Link to="/searchpeople">People</Link>
+    </li>
+    <li>
+      <Link to="/chat">Chat</Link>
+    </li>
+    <li>
+      <div className="dropdown">
+        <button className="dropdown-toggle">Menu</button>
+        <div className="dropdown-menu">
+          <Link to="/landingpage">Home</Link>
+          <Link to="/SearchEvents">Events</Link>
+          <Link to="/registeredEvents">Registration</Link>
+          <Link to="/edit-profile">Profile</Link>
+          <Link to="/posts">Forums</Link>
+          <Link to="/searchpeople">People</Link>
+          <Link to="/chat">Chat</Link>
+          <button onClick={logout}>Logout</button>
         </div>
-      </li>
-      <li>
-        <div className="dropdown">
-          <button className="dropdown-toggle">Menu</button>
-          <div className="dropdown-menu">
-            <Link to="/dashboard">My Profile</Link>
-            <Link to="/faqs">FAQ</Link>
-            <Link to="/terms">Terms</Link>
-            <button onClick={logout}>Logout</button>
-          </div>
-        </div>
-      </li>
-    </ul>
+      </div>
+    </li>
+  </ul>
   );
 
   const guestLinks = (

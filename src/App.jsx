@@ -12,15 +12,14 @@ import AddEducation from "./components/profile-forms/AddEducation";
 import AddExperience from "./components/profile-forms/AddExperience";
 import CreateProfile from "./components/profile-forms/CreateProfile";
 import EditProfile from "./components/profile-forms/EditProfile";
-import AddEvent from "./components/profile-forms/AddEvent";
-
+import AddEvent from "./components/profile-forms/Addevent";
 //from profile
 import Profile from "./components/profile/Profile";
 import Profiles from "./components/profiles/Profiles";
 //test
 import Landing from "./components/layout/Landing";
 import DASHBOARDORG from "./components/dashboard/dashboardOrg";
-import Landingorg from "./components/dashboard/landingorg";
+import Landingorg from "./components/dashboard/Landingorg";
 //faq and terms
 import Faq from "./components/layout/faq";
 import Termsandpolicy from "./components/layout/termsandpolicy";
@@ -30,6 +29,7 @@ import Post from "./components/posts/Post";
 //landing page
 import LandingPage from "./components/dashboard/LandingPage";
 import Dashboard from "./components/dashboard/Dashboard";
+import EventOrgInfo from "./components/profile-forms/EventOrgInfo";
 //registered event
 import RegisteredEvent from "./components/dashboard/RegisteredEvent";
 import Waitinglistevent from "./components/dashboard/Waitinglistevent";
@@ -39,6 +39,9 @@ import Paymentevents from "./components/profile-forms/Paymentevents";
 import Confirmationpageevent from "./components/dashboard/Confirmationpageevent";
 import SearchPeople from "./components/dashboard/SearchPeople";
 import ProfileInformation from "./components/dashboard/ProfileInformation";
+import EditEvent from "./components/profile-forms/EditEvent";
+import ScanQr from "./components/profile-forms/ScanQr";
+
 function App() {
   return (
     <>
@@ -80,6 +83,12 @@ function App() {
           <Route path="/edit/:id" element={<EventInformation />} />
           <Route path="/payment/:id" element={<Paymentevents />} />
           <Route path="/confi/:id" element={<Confirmationpageevent />} />
+          <Route path="/event/:id" element={<EventOrgInfo />} />
+          <Route path="/event/:id/scan-qr" element={<ScanQr />} />
+          <Route path="/event/:eventId/edit" element={<EditEvent />} />
+          <Route path="/add-education" element={<AddEducation />} />
+          <Route path="/add-experience" element={<AddExperience />} />
+          <Route path="/registeredEvents" element={<RegisteredEvent />} />
         </Routes>
       </BrowserRouter>
     </>

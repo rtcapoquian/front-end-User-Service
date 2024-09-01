@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api"; // Import the API instance
-
+import Navbar from "../layout/Navbar";
 
 const Events = props => (
   <div className="small-card">
@@ -62,6 +62,8 @@ export default class SearchEvents extends Component {
   render() {
     return (
       <div>
+    <Navbar/>
+
         <form onSubmit={this.onSubmit}>
           <input
             type="text"

@@ -1,48 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import api from "../../api"; // Import the API instance
 import Navbar from "../layout/Navbar";
 
 const RegisteredEvent = () => {
-  const { id } = useParams(); // Access the dynamic route parameter
   const [events, setEvents] = useState([]);
-  const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState("upcoming"); // Default to "upcoming"
 
   useEffect(() => {
-    if (id) {
-      fetchRegisteredEvent(id);
-    }
-  }, [id]);
+    fetchEventsByStatus(statusFilter);
+  }, [statusFilter]);
 
-  const fetchRegisteredEvent = async (eventId) => {
+  const fetchEventsByStatus = async (status) => {
     try {
-      const response = await api.get(`/api/auth/regievent/${eventId}`);
-      const { activityname, venuename } = response.data[0];
-      await fetchEvents(activityname);
-      await fetchVenues(venuename);
+      setLoading(true);
+      const response = await api.get(`/api/events/registered/${status}`);
+      setEvents(response.data);
+      console.log(response.data);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching registration event:", error);
+      console.error(`Error fetching ${status} events:`, error);
+      setLoading(false);
     }
   };
 
-  const fetchEvents = async (activitynames) => {
-    try {
-      const response = await api.put("/api/auth/getevent", { activitynames });
-      setEvents(response.data);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
-
-  const fetchVenues = async (venuename) => {
-    try {
-      const response = await api.put("/api/auth/getvenue", { venuename });
-      setVenues(response.data);
-    } catch (error) {
-      console.error("Error fetching venues:", error);
-    }
+  const handleStatusChange = (event) => {
+    setStatusFilter(event.target.value);
   };
 
   if (loading) {
@@ -53,22 +37,45 @@ const RegisteredEvent = () => {
     <>
       <Navbar />
       <div className="container">
-        <h1>Registered Event</h1>
-        <div>
-          <h2>Events</h2>
-          <ul>
-            {events.map((event, index) => (
-              <li key={index}>{event.name}</li>
-            ))}
-          </ul>
+        <h1>Registered Events</h1>
+        <div className="filters">
+          <label>
+            <input
+              type="radio"
+              value="upcoming"
+              checked={statusFilter === "upcoming"}
+              onChange={handleStatusChange}
+            />
+            Upcoming
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="past"
+              checked={statusFilter === "past"}
+              onChange={handleStatusChange}
+            />
+            Past
+          </label>
         </div>
         <div>
-          <h2>Venues</h2>
-          <ul>
-            {venues.map((venue, index) => (
-              <li key={index}>{venue.name}</li>
-            ))}
-          </ul>
+          <h2>Events</h2>
+          {events.length > 0 ? (
+            <ul>
+              {events.map((event) => (
+                <li key={event._id}>
+                  <h3>{event.name}</h3>
+                  <p>Date: {new Date(event.date).toLocaleDateString()}</p>
+                  <p>Time: {event.time}</p>
+                  <p>Status: {event.status}</p>
+                  {/* Link to the event details page */}
+                  <Link to={`/edit/${event._id}`}>Go to Event</Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No events found.</p>
+          )}
         </div>
         <Link to="/">Back to Home</Link>
       </div>

@@ -12,9 +12,9 @@ const Landing = () => {
 
     if (token && userType) {
       if (userType === "Organizer") {
-        navigate("/dashboardOrg");
+        navigate("/landingorg");
       } else if (userType === "Attendee") {
-        navigate("/landingpage");
+        navigate("/SearchEvents");
       }
     }
   }, [navigate]);
