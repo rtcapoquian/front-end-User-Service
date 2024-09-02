@@ -41,7 +41,7 @@ import SearchPeople from "./components/dashboard/SearchPeople";
 import ProfileInformation from "./components/dashboard/ProfileInformation";
 import EditEvent from "./components/profile-forms/EditEvent";
 import ScanQr from "./components/profile-forms/ScanQr";
-
+import Chatscreen from "./components/chat/Chatscreen";
 function App() {
   return (
     <>
@@ -89,6 +89,7 @@ function App() {
           <Route path="/add-education" element={<AddEducation />} />
           <Route path="/add-experience" element={<AddExperience />} />
           <Route path="/registeredEvents" element={<RegisteredEvent />} />
+          <Route path="/chatscreen" element={<Chatscreen />} />
         </Routes>
       </BrowserRouter>
     </>
