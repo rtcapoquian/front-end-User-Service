@@ -180,7 +180,15 @@ function App() {
               </>
             }
           />
-          <Route path="/gotoprofile/:id" element={<ProfileInformation />} />
+          <Route
+            path="/gotoprofile/:id"
+            element={
+              <>
+                <Navbar />
+                <ProfileInformation />
+              </>
+            }
+          />
           <Route
             exact
             path="/SearchEvents"
