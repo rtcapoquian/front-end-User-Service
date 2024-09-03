@@ -30,11 +30,11 @@ import Post from "./components/posts/Post";
 //landing page
 import LandingPage from "./components/dashboard/LandingPage";
 import Dashboard from "./components/dashboard/Dashboard";
-import EventOrgInfo from "./components/profile-forms/EventOrgInfo";
+import EventOrgInfo from "./components/EventOrginfo/EventOrgInfo";
 //registered event
 import RegisteredEvent from "./components/dashboard/RegisteredEvent";
 import Waitinglistevent from "./components/dashboard/Waitinglistevent";
-import SearchEvents from "./components/dashboard/SearchEvents";
+import SearchEvents from "./components/Searchevent/SearchEvents";
 import EventInformation from "./components/dashboard/EventInformation";
 import Paymentevents from "./components/profile-forms/Paymentevents";
 import Confirmationpageevent from "./components/dashboard/Confirmationpageevent";
@@ -127,7 +127,16 @@ function App() {
               </>
             }
           />
-          <Route exact path="/posts/:id" element={<Post />} />
+          <Route
+            exact
+            path="/posts/:id"
+            element={
+              <>
+                <Navbar />
+                <Post />
+              </>
+            }
+          />
           <Route exact path="/profile/:user_id" element={<Profiles />} />
           <Route
             exact
@@ -186,7 +195,7 @@ function App() {
             path="/edit/:id"
             element={
               <>
-                <NavbarOrg />
+                <Navbar />
                 <EventInformation />
               </>
             }

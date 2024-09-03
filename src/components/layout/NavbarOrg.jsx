@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { cn } from "../../lib/utils";
 import {
   NavigationMenu,
@@ -9,13 +10,33 @@ import {
 } from "../ui/navigation-menu";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
+import api from "@/api";
 import { ModeToggle } from "../layout/mode-toggle";
 
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate(); // Using react-router's useNavigate for redirection
 
+  const navigate = useNavigate(); // Using react-router's useNavigate for redirection
+  const [profileImage, setProfileImage] = useState(null);
+  useEffect(() => {
+    // Fetch profile image URL from API
+    const fetchProfileImage = async () => {
+      try {
+        const response = await api.get("/api/profile/me");
+        if (response.data && response.data.image) {
+          setProfileImage(response.data.image);
+        } else {
+          setProfileImage(null); // Default to null if no image
+        }
+      } catch (error) {
+        console.error("Error fetching profile image:", error);
+        setProfileImage(null); // Default to null if error occurs
+      }
+    };
+
+    fetchProfileImage();
+  }, []);
   const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
@@ -62,7 +83,7 @@ const Navbar = () => {
                   <Link to="/landingOrg">Events</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
-          
+
               <NavigationMenuItem>
                 <NavigationMenuLink
                   className={cn(
@@ -110,10 +131,18 @@ const Navbar = () => {
         {/* Desktop Dropdown Icon */}
         <div className="hidden md:flex items-center relative">
           <button onClick={toggleDropdown} className="flex items-center ml-4">
-            <FaUserCircle
-              size={30}
-              className="text-primary hover:text-accent-foreground"
-            />
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="User Profile"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <FaUserCircle
+                size={30}
+                className="text-primary hover:text-accent-foreground"
+              />
+            )}
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 top-full mt-2 w-48 bg-card border border-muted shadow-lg rounded-md">
@@ -177,7 +206,9 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/dashboardOrg" onClick={handleLinkClick}>
+                  <Link to="/dashboardOrg" 
+                  onClick={handleLinkClick}
+                  >
                     Home
                   </Link>
                 </NavigationMenuLink>
@@ -246,10 +277,18 @@ const Navbar = () => {
             {/* Mobile Dropdown Icon */}
             <div className="mt-4 p-4 border-t border-muted">
               <button onClick={toggleDropdown} className="flex items-center">
-                <FaUserCircle
-                  size={30}
-                  className="text-primary hover:text-accent"
-                />
+              {profileImage ? (
+              <img
+                src={profileImage}
+                alt="User Profile"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <FaUserCircle
+                size={30}
+                className="text-primary hover:text-accent-foreground"
+              />
+            )}
               </button>
               {isDropdownOpen && (
                 <div className="mt-2 bg-card border border-muted shadow-lg rounded-md">
@@ -278,7 +317,7 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-          <ModeToggle /> {/* Add ModeToggle button */}
+            <ModeToggle /> {/* Add ModeToggle button */}
           </NavigationMenu>
         </div>
       </div>

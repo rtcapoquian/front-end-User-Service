@@ -20,6 +20,7 @@ const AddEvent = () => {
     details: "",
     date: "",
     time: "",
+    image: "", // Add image URL field to state
   });
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -38,6 +39,7 @@ const AddEvent = () => {
     details,
     date,
     time,
+    image, // Add image to destructured fields
   } = formData;
 
   useEffect(() => {
@@ -66,8 +68,9 @@ const AddEvent = () => {
     setLoading(true);
 
     try {
+      console.log(formData);
       const response = await api.post("/api/events", formData);
-      const postText = `Event: ${name} at ${address} on ${date} at ${time}`;
+      const postText = `Event: ${name} at ${address}`;
       await api.post("/api/posts", { text: postText });
 
       setSuccessMessage("Event and post added successfully!");
@@ -101,7 +104,7 @@ const AddEvent = () => {
   };
 
   return (
-    <section className="max-w-2xl mx-auto p-4  mt-8 rounded-xl border bg-card text-card-foreground shadow">
+    <section className="max-w-2xl mx-auto p-4 mt-8 rounded-xl border bg-card text-card-foreground shadow">
       <h1 className="text-3xl font-semibold text-center mb-4 text-foreground">
         Add Event
       </h1>
@@ -181,6 +184,21 @@ const AddEvent = () => {
                 onChange={onChange}
                 placeholder="Enter event capacity"
                 required
+                className="text-foreground bg-input"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="image" className="text-foreground">
+                Image URL 
+              </Label>
+              <Input
+                type="text"
+                name="image"
+                id="image"
+                value={image}
+                onChange={onChange}
+                placeholder="Enter image URL"
                 className="text-foreground bg-input"
               />
             </div>

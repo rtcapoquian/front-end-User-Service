@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import api from "@/api";
+import { useEffect } from "react";
 import { cn } from "../../lib/utils";
 import {
   NavigationMenu,
@@ -15,7 +17,26 @@ const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate(); // Using react-router's useNavigate for redirection
+  const [profileImage, setProfileImage] = useState(null);
+  useEffect(() => {
+    // Fetch profile image URL from API
+    const fetchProfileImage = async () => {
+      try {
+        const response = await api.get("/api/profile/me");
+        if (response.data && response.data.image) {
+          setProfileImage(response.data.image);
+        } else {
+          setProfileImage(null); // Default to null if no image
+        }
+      } catch (error) {
+        console.error("Error fetching profile image:", error);
+        setProfileImage(null); // Default to null if error occurs
+      }
+    };
 
+    fetchProfileImage();
+  }, []);
+  console.log(profileImage)
   const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
@@ -25,7 +46,9 @@ const Navbar = () => {
     localStorage.removeItem("user_id");
     navigate("/"); // Redirect to home page using react-router
   };
-
+  const handleLinkClick = () => {
+    setMenuOpen(false); // Close the menu on link click
+  };
   return (
     <div className="bg-background text-foreground p-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
@@ -68,16 +91,7 @@ const Navbar = () => {
                   <Link to="/registeredEvents">Registration</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
-                  )}
-                >
-                  <Link to="/edit-profile">Profile</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
+
               <NavigationMenuItem>
                 <NavigationMenuLink
                   className={cn(
@@ -108,6 +122,16 @@ const Navbar = () => {
                   <Link to="/chatscreen">Chat</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/edit-profile">Profile</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -115,10 +139,18 @@ const Navbar = () => {
         {/* Desktop Dropdown Icon */}
         <div className="hidden md:flex items-center relative">
           <button onClick={toggleDropdown} className="flex items-center ml-4">
-            <FaUserCircle
-              size={30}
-              className="text-primary hover:text-accent-foreground"
-            />
+          {profileImage ? (
+              <img
+                src={profileImage}
+                alt="User Profile"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <FaUserCircle
+                size={30}
+                className="text-primary hover:text-accent-foreground"
+              />
+            )}
           </button>
           {isDropdownOpen && (
             <div className="absolute right-0 top-full mt-2 w-48 bg-card border border-muted shadow-lg rounded-md">
@@ -182,7 +214,7 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/landingpage">Home</Link>
+                  <Link to="/landingpage"   onClick={handleLinkClick}>Home</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -192,7 +224,7 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/SearchEvents">Events</Link>
+                  <Link to="/SearchEvents"  onClick={handleLinkClick}>Events</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -202,7 +234,7 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/registeredEvents">Registration</Link>
+                  <Link to="/registeredEvents"  onClick={handleLinkClick}>Registration</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -212,7 +244,7 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/edit-profile">Profile</Link>
+                  <Link to="/edit-profile"  onClick={handleLinkClick}>Profile</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -222,7 +254,7 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/posts">Forums</Link>
+                  <Link to="/posts"  onClick={handleLinkClick}>Forums</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -232,7 +264,7 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/searchpeople">People</Link>
+                  <Link to="/searchpeople"  onClick={handleLinkClick}>People</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -242,17 +274,25 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/chatscreen">Chat</Link>
+                  <Link to="/chatscreen"  onClick={handleLinkClick}>Chat</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
             {/* Mobile Dropdown Icon */}
             <div className="mt-4 p-4 border-t border-muted">
               <button onClick={toggleDropdown} className="flex items-center">
-                <FaUserCircle
-                  size={30}
-                  className="text-primary hover:text-accent"
-                />
+              {profileImage ? (
+              <img
+                src={profileImage}
+                alt="User Profile"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <FaUserCircle
+                size={30}
+                className="text-primary hover:text-accent-foreground"
+              />
+            )}
               </button>
               {isDropdownOpen && (
                 <div className="mt-2 bg-card border border-muted shadow-lg rounded-md">

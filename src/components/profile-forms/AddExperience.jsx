@@ -39,12 +39,14 @@ const AddExperience = () => {
   };
 
   return (
-    <section>
-      <h1>Add Your Experience</h1>
-      {loading && <p>Loading...</p>}
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <form onSubmit={onSubmit}>
+    <section className="max-w-md mx-auto m-16 p-8 bg-card shadow-lg rounded-xl dark:bg-card-dark text-card-foreground border">
+      <h1 className="text-2xl font-semibold mb-4 text-primary dark:text-primary-dark">
+        Add Your Experience Details
+      </h1>
+      {loading && <p className="text-accent">Loading...</p>}
+      {successMessage && <p className="text-primary dark:text-primary-dark">{successMessage}</p>}
+      {errorMessage && <p className="text-destructive dark:text-destructive-dark">{errorMessage}</p>}
+      <form onSubmit={onSubmit} className="space-y-4">
         <input
           type="text"
           placeholder="* Job Title"
@@ -52,6 +54,7 @@ const AddExperience = () => {
           value={title}
           onChange={onChange}
           required
+          className="w-full p-2 border border-border rounded-md bg-input dark:bg-input-dark"
         />
         <input
           type="text"
@@ -60,6 +63,7 @@ const AddExperience = () => {
           value={company}
           onChange={onChange}
           required
+          className="w-full p-2 border border-border rounded-md bg-input dark:bg-input-dark"
         />
         <input
           type="text"
@@ -67,12 +71,19 @@ const AddExperience = () => {
           name="location"
           value={location}
           onChange={onChange}
+          className="w-full p-2 border border-border rounded-md bg-input dark:bg-input-dark"
         />
-        <label>
-          From Date
-          <input type="date" name="from" value={from} onChange={onChange} />
-        </label>
-        <label>
+        <div className="flex flex-col space-y-2">
+          <label className="font-medium text-primary dark:text-primary-dark">From Date</label>
+          <input
+            type="date"
+            name="from"
+            value={from}
+            onChange={onChange}
+            className="p-2 border border-border rounded-md bg-input dark:bg-input-dark"
+          />
+        </div>
+        <div className="flex items-center space-x-2">
           <input
             type="checkbox"
             name="current"
@@ -81,27 +92,40 @@ const AddExperience = () => {
               setFormData({ ...formData, current: !current });
               toggleDisabled(!toDateDisabled);
             }}
-          />{" "}
-          Current Job
-        </label>
-        <label>
-          To Date
+            className="form-checkbox"
+          />
+          <label className="font-medium text-primary dark:text-primary-dark">Current Job</label>
+        </div>
+        <div className="flex flex-col space-y-2">
+          <label className="font-medium text-primary dark:text-primary-dark">To Date</label>
           <input
             type="date"
             name="to"
             value={to}
             onChange={onChange}
-            disabled={toDateDisabled ? "disabled" : ""}
+            disabled={toDateDisabled}
+            className="p-2 border border-border rounded-md bg-input dark:bg-input-dark"
           />
-        </label>
+        </div>
         <textarea
           name="description"
+          cols="30"
+          rows="5"
           placeholder="Job Description"
           value={description}
           onChange={onChange}
+          className="w-full p-2 border border-border rounded-md bg-input dark:bg-input-dark"
         />
-        <input type="submit" value="Submit" />
-        <button type="button" onClick={() => window.history.back()}>
+        <input
+          type="submit"
+          value="Submit"
+          className="w-full p-2 bg-primary text-primary-foreground font-semibold rounded-md cursor-pointer dark:bg-primary-dark dark:text-primary-foreground-dark"
+        />
+        <button
+          type="button"
+          onClick={() => window.history.back()}
+          className="w-full p-2 bg-secondary text-secondary-foreground font-semibold rounded-md cursor-pointer dark:bg-secondary-dark dark:text-secondary-foreground-dark"
+        >
           Go Back
         </button>
       </form>

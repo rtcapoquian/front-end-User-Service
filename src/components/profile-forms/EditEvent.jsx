@@ -9,11 +9,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 const EditEvent = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     name: "",
     information: "",
@@ -24,6 +32,7 @@ const EditEvent = () => {
     details: "",
     date: "",
     time: "",
+    status: "Scheduled", // Added status field
   });
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -45,6 +54,7 @@ const EditEvent = () => {
           details: response.data.details,
           date: new Date(response.data.date),
           time: response.data.time,
+          status: response.data.status || "Scheduled", // Set initial status
         });
       } catch (error) {
         console.error("Error fetching event:", error);
@@ -57,7 +67,7 @@ const EditEvent = () => {
     fetchEvent();
   }, [eventId]);
 
-  const onChange = (e) => 
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onMapClick = ({ lat, lng }) => {
@@ -93,7 +103,7 @@ const EditEvent = () => {
   };
 
   const handleNextStep = () => {
-    if (currentStep < 3) {
+    if (currentStep < 4) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -102,6 +112,13 @@ const EditEvent = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
+  };
+
+  const handleStatusChange = (status) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      status,
+    }));
   };
 
   if (loading) return <div>Loading...</div>;
@@ -277,7 +294,10 @@ const EditEvent = () => {
                 <Label htmlFor="date" className="text-foreground">
                   Select the date for the event.
                 </Label>
-                <CalendarForm date={formData.date} onDateChange={onDateChange} />
+                <CalendarForm
+                  date={formData.date}
+                  onDateChange={onDateChange}
+                />
               </div>
 
               <div>
@@ -306,10 +326,61 @@ const EditEvent = () => {
                 Previous
               </Button>
               <Button
+                type="button"
+                onClick={handleNextStep}
+                className="bg-primary text-primary-foreground"
+              >
+                Next
+              </Button>
+            </div>
+          </>
+        )}
+
+        {currentStep === 4 && (
+          <>
+            <div className="flex flex-col items-center">
+              <Label htmlFor="status" className="text-foreground mb-4">
+                Event Status
+              </Label>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">{formData.status}</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Status</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={() => handleStatusChange("Scheduled")}
+                  >
+                    Scheduled
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleStatusChange("Completed")}
+                  >
+                    Completed
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleStatusChange("Cancelled")}
+                  >
+                    Cancelled
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            <div className="flex justify-between mt-4">
+              <Button
+                type="button"
+                onClick={handlePreviousStep}
+                className="bg-primary text-primary-foreground"
+              >
+                Previous
+              </Button>
+              <Button
                 type="submit"
                 className="bg-primary text-primary-foreground"
               >
-                Save Changes
+                Submit
               </Button>
             </div>
           </>
