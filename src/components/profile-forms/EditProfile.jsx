@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import api from "../../api"; // Update this path based on your directory structure
-import Navbar from "../layout/Navbar";
 
 const EditProfile = () => {
   const [formData, setFormData] = useState({
@@ -93,7 +92,6 @@ const EditProfile = () => {
 
   return (
     <section>
-      <Navbar />
       <div>
         <h2>Edit Your Profile</h2>
         {message && <div className="success-message">{message}</div>}

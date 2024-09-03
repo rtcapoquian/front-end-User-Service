@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../layout/Navbar";
 import api from "../../api"; // Assuming you have an Axios instance for API requests
 import Spinner from "../layout/Spinner";
 
@@ -36,7 +35,6 @@ const DashboardOrg = () => {
     <Spinner />
   ) : (
     <Fragment>
-      <Navbar />
       <div className="welcome__block">
         <div>
           <h1>Welcome back, {user?.name}</h1>

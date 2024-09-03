@@ -2,8 +2,7 @@ import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { API_URL } from '../../API_URL';
-import '../../css/forms.css';
-import '../../css/register.css';
+
 
 const Register = () => {
   const [formData, setFormData] = useState({

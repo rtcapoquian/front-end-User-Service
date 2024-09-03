@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from "react";
 import axios from "axios";
-import "../../css/forms.css";
 import { API_URL } from "../../API_URL";
 
 const Resetpass = () => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import api from '../../api';
-import Navbar from '../layout/Navbar';
 
 const Events = ({ event }) => (
   <div className="event-card">
@@ -42,7 +41,6 @@ const Waitinglistevent = () => {
 
   return (
     <>
-      <Navbar />
       <div className="container">
         {events.map(event => (
           <Events event={event} key={event._id} />

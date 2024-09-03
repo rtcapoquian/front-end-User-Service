@@ -1,118 +1,287 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { cn } from "../../lib/utils";
+import {
+  NavigationMenu,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuItem,
+  navigationMenuTriggerStyle,
+} from "../ui/navigation-menu";
+import { Link, useNavigate } from "react-router-dom";
+import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
+import { ModeToggle } from "../layout/mode-toggle";
 
 const Navbar = () => {
-  // Simulated authentication state
-  const isAuthenticated = Boolean(localStorage.getItem("token"));
-  const userType = localStorage.getItem("userType");
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate(); // Using react-router's useNavigate for redirection
 
-  // Logout function
+  const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
+  const toggleMenu = () => setMenuOpen(!isMenuOpen);
+
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userType");
     localStorage.removeItem("user_id");
-    window.location.href = "/"; // Redirect to home page after logout
+    navigate("/"); // Redirect to home page using react-router
   };
 
-  const organizerLinks = (
-    <ul>
-      <li>
-        <Link to="/dashboardOrg">Home</Link>
-      </li>
-      <li>
-        <Link to="/landingOrg">Events</Link>
-      </li>
-      <li>
-        <Link to="/edit-profile">Profile</Link>
-      </li>
-      <li>
-        <Link to="/posts">Forums</Link>
-      </li>
-      <li>
-        <Link to="/searchpeople">People</Link>
-      </li>
-      <li>
-        <Link to="/chatscreen">Chat</Link>
-      </li>
-      <li>
-        <div className="dropdown">
-          <button className="dropdown-toggle">Menu</button>
-          <div className="dropdown-menu">
-            <Link to="/dashboardOrg">Home</Link>
-            <Link to="/landingOrg">Events</Link>
-            <Link to="/edit-profile">Profile</Link>
-            <Link to="/posts">Forums</Link>
-            <Link to="/searchpeople">People</Link>
-            <Link to="/chatscreen">Chat</Link>
-            <button onClick={logout}>Logout</button>
-          </div>
-        </div>
-      </li>
-    </ul>
-  );
-
-  const authLinks = (
-    <ul>
-      <li>
-        <Link to="/landingpage">Home</Link>
-      </li>
-      <li>
-        <Link to="/SearchEvents">Events</Link>
-      </li>
-      <li>
-        <Link to="/registeredEvents">Registration</Link>
-      </li>
-      <li>
-        <Link to="/edit-profile">Profile</Link>
-      </li>
-      <li>
-        <Link to="/posts">Forums</Link>
-      </li>
-      <li>
-        <Link to="/searchpeople">People</Link>
-      </li>
-      <li>
-        <Link to="/chatscreen">Chat</Link>
-      </li>
-      <li>
-        <div className="dropdown">
-          <button className="dropdown-toggle">Menu</button>
-          <div className="dropdown-menu">
-            <Link to="/landingpage">Home</Link>
-            <Link to="/SearchEvents">Events</Link>
-            <Link to="/registeredEvents">Registration</Link>
-            <Link to="/edit-profile">Profile</Link>
-            <Link to="/posts">Forums</Link>
-            <Link to="/searchpeople">People</Link>
-            <Link to="/chatscreen">Chat</Link>
-            <button onClick={logout}>Logout</button>
-          </div>
-        </div>
-      </li>
-    </ul>
-  );
-
-  const guestLinks = (
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-    </ul>
-  );
-
   return (
-    <nav>
-      <div>
-        <Link to="/">
-          <span>Logo</span> {/* Replace with logo or text */}
+    <div className="bg-background text-foreground p-4 shadow-md">
+      <div className="container mx-auto flex items-center justify-between">
+        {/* Logo/Title */}
+        <Link to="/landingpage" className="text-2xl font-bold flex-shrink-0">
+          Eventcs
         </Link>
+
+        {/* Desktop Navigation Menu */}
+        <div className="hidden mx-4 md:flex items-center flex-1 justify-center space-x-4">
+          <NavigationMenu className="flex items-center space-x-4">
+            <NavigationMenuList className="flex space-x-4">
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/landingpage">Home</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/SearchEvents">Events</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/registeredEvents">Registration</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/edit-profile">Profile</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/posts">Forums</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/searchpeople">People</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/chatscreen">Chat</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        {/* Desktop Dropdown Icon */}
+        <div className="hidden md:flex items-center relative">
+          <button onClick={toggleDropdown} className="flex items-center ml-4">
+            <FaUserCircle
+              size={30}
+              className="text-primary hover:text-accent-foreground"
+            />
+          </button>
+          {isDropdownOpen && (
+            <div className="absolute right-0 top-full mt-2 w-48 bg-card border border-muted shadow-lg rounded-md">
+              <ul className="text-sm">
+                <li>
+                  <Link
+                    to="/edit-profile"
+                    className="block px-4 py-2 text-card-foreground hover:bg-secondary"
+                  >
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={logout}
+                    className="block px-4 py-2 text-red-600 hover:bg-secondary w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* Light/Dark Mode Toggle */}
+        <div className="hidden md:flex items-center ml-4">
+          <ModeToggle /> {/* Add ModeToggle button */}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={toggleMenu}
+          className="md:hidden flex items-center mr-4"
+        >
+          {isMenuOpen ? (
+            <FaTimes size={24} className="text-primary" />
+          ) : (
+            <FaBars size={24} className="text-primary" />
+          )}
+        </button>
+
+        {/* Mobile Menu */}
+        <div
+          className={`fixed inset-0 bg-card shadow-lg z-50 md:hidden ${
+            isMenuOpen ? "block" : "hidden"
+          }`}
+        >
+          <div className="flex justify-between items-center p-4 border-b">
+            <button onClick={toggleMenu} className="text-primary">
+              <FaTimes size={24} />
+            </button>
+            <span className="text-2xl font-bold">Eventcs</span>
+          </div>
+          <NavigationMenu className="flex flex-col p-4 space-y-4">
+            <NavigationMenuList className="flex flex-col space-y-4">
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/landingpage">Home</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/SearchEvents">Events</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/registeredEvents">Registration</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/edit-profile">Profile</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/posts">Forums</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/searchpeople">People</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                  )}
+                >
+                  <Link to="/chatscreen">Chat</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+            {/* Mobile Dropdown Icon */}
+            <div className="mt-4 p-4 border-t border-muted">
+              <button onClick={toggleDropdown} className="flex items-center">
+                <FaUserCircle
+                  size={30}
+                  className="text-primary hover:text-accent"
+                />
+              </button>
+              {isDropdownOpen && (
+                <div className="mt-2 bg-card border border-muted shadow-lg rounded-md">
+                  <ul className="text-sm">
+                    <li>
+                      <Link
+                        to="/edit-profile"
+                        className="block px-4 py-2 text-card-foreground hover:bg-secondary"
+                      >
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={logout}
+                        className="block px-4 py-2 text-red-600 hover:bg-secondary w-full text-left"
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+            <ModeToggle /> {/* Add ModeToggle button */}
+          </NavigationMenu>
+        </div>
       </div>
-      {!isAuthenticated
-        ? guestLinks
-        : userType === "Organizer"
-        ? organizerLinks
-        : authLinks}
-    </nav>
+    </div>
   );
 };
 

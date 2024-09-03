@@ -1,7 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
-import "../../css/forms.css";
 import { API_URL } from "../../API_URL";
 
 const Login = () => {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../api";
-import Navbar from "../layout/Navbar";
 import Notification from "../layout/Notification";
 
 const EventOrgInfo = () => {
@@ -64,7 +63,6 @@ const EventOrgInfo = () => {
 
   return (
     <div>
-      <Navbar />
       {event && (
         <div className="container">
           <h2>Event Details</h2>

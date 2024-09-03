@@ -1,10 +1,8 @@
 import React from 'react';
-import Navbar from '../layout/Navbar'
 
 function termsandpolicy() {
     return (
         <div>
-            <Navbar></Navbar>
         <div className= "container text-justify" >
 
             <h2 style={{textAlign:"center"}}><strong>Terms and Conditions</strong></h2>

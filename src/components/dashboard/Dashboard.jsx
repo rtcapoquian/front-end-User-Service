@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/layout/Navbar";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import api from "../../api"; // Import the API instance
@@ -53,7 +52,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar />
       <div className="container mx-auto p-4">
         {user.user && (
           <>

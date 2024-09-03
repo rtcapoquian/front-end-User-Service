@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../api"; // Importing the custom API
 import MapComponent from "../profile-forms/MapComponent";
-import Navbar from "../layout/Navbar";
 const EventInformation = () => {
   const { id } = useParams(); // Event ID from URL
   const [eventDetails, setEventDetails] = useState({
@@ -141,7 +140,6 @@ const EventInformation = () => {
 
   return (
     <div>
-      <Navbar />
       <h2>{name}</h2>
       <p>{information}</p>
       <p>Date: {stringDates[0]}</p>

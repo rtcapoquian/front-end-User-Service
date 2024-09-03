@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../api';
-import Navbar from '../layout/Navbar';
 
 const ConfirmationPageEvent = () => {
   const [activityName, setActivityName] = useState('');
@@ -18,7 +17,6 @@ const ConfirmationPageEvent = () => {
 
   return (
     <div>
-      <Navbar />
       <h1>You have registered for the event {activityName} successfully</h1>
     </div>
   );

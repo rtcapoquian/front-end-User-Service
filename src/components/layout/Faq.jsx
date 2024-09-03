@@ -1,12 +1,8 @@
 import React from "react";
-import "../../css/faq.css";
-import Navbar from "../layout/Navbar";
-// import '../../css/Navbar'
 
 export default function faq() {
   return (
     <div>
-      <Navbar></Navbar>
       <div className="container">
         <div
           class="jumbotron jumbotron-fluid"

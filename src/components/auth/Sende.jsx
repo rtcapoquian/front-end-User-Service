@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../API_URL";
-import "../../css/forms.css";
 
 const Sende = () => {
   const [formData, setFormData] = useState({

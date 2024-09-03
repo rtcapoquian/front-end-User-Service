@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api";
-import Navbar from "../layout/Navbar";
 
 const Paymentevents = () => {
   const [email, setEmail] = useState("");
@@ -46,7 +45,6 @@ const Paymentevents = () => {
 
   return (
     <div>
-      <Navbar />
       <form onSubmit={onSubmit}>
         <input
           type="text"

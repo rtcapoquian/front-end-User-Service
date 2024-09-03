@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api"; // Import the API instance
-import Navbar from "../layout/Navbar";
 
 const RegisteredEvent = () => {
   const [events, setEvents] = useState([]);
@@ -35,7 +34,6 @@ const RegisteredEvent = () => {
 
   return (
     <>
-      <Navbar />
       <div className="container">
         <h1>Registered Events</h1>
         <div className="filters">

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api';
-import Navbar from '../layout/Navbar';
 const Events = ({ event }) => (
   <div>
     <div>
@@ -66,7 +65,6 @@ export default class LandingPage extends Component {
   render() {
     return (
       <div>
-        <Navbar />
         <div>
           <div>
             <div>

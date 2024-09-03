@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../api";
-import Navbar from "../layout/Navbar";
 
 // Functional component for displaying user profile with additional details
 const Profile = ({ event }) => {
@@ -69,7 +68,6 @@ const ProfileInformation = () => {
 
   return (
     <div>
-      <Navbar />
       <Profile event={event} />
     </div>
   );
