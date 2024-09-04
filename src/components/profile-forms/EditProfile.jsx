@@ -76,7 +76,7 @@ const EditProfile = () => {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching profile data:", error);
-        setError("Error fetching profile data. Please try again.");
+        setError("Your profile has not been set up yet, set it up now.");
         setLoading(false);
       }
     };

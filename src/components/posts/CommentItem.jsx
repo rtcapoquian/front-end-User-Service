@@ -41,7 +41,7 @@ const CommentItem = ({ postId, comment, auth, onCommentDeleted }) => {
 
         <div className="flex-1">
           <Link
-            to={`/profile/${comment.user}`}
+            to={`/gotoprofile/${comment.user}`}
             className="text-blue-500 hover:underline"
           >
             <h4 className="text-lg font-semibold">{comment.name}</h4>

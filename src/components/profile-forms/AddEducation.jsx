@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import api from "../../api"; // Import the API instance
+import { useNavigate } from "react-router-dom";
 
 const AddEducation = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     school: "",
     degree: "",
@@ -30,6 +33,7 @@ const AddEducation = () => {
       await api.put("/api/profile/education", formData); // Update this URL to match your API endpoint
       setSuccessMessage("Education details added successfully!");
       setErrorMessage(""); // Clear any previous error message
+      navigate("/edit-profile");
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("Error adding education details. Please try again.");

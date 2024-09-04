@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import api from "@/api";
-import { useEffect } from "react";
 import { cn } from "../../lib/utils";
 import {
   NavigationMenu,
@@ -9,34 +9,34 @@ import {
   NavigationMenuItem,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { ModeToggle } from "../layout/mode-toggle";
 
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate(); // Using react-router's useNavigate for redirection
   const [profileImage, setProfileImage] = useState(null);
+  const location = useLocation(); // Get current location
+  const navigate = useNavigate();
+
   useEffect(() => {
-    // Fetch profile image URL from API
     const fetchProfileImage = async () => {
       try {
         const response = await api.get("/api/profile/me");
         if (response.data && response.data.image) {
           setProfileImage(response.data.image);
         } else {
-          setProfileImage(null); // Default to null if no image
+          setProfileImage(null);
         }
       } catch (error) {
         console.error("Error fetching profile image:", error);
-        setProfileImage(null); // Default to null if error occurs
+        setProfileImage(null);
       }
     };
 
     fetchProfileImage();
   }, []);
-  console.log(profileImage);
+
   const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
@@ -44,11 +44,16 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userType");
     localStorage.removeItem("user_id");
-    navigate("/"); // Redirect to home page using react-router
+    navigate("/");
   };
+
   const handleLinkClick = () => {
-    setMenuOpen(false); // Close the menu on link click
+    setMenuOpen(false);
   };
+
+  // Function to check if the current route matches the link path
+  const isActive = (path) => location.pathname === path;
+
   return (
     <div className="bg-background text-foreground p-4 border dark:border-none">
       <div className="container mx-auto flex items-center justify-between">
@@ -65,7 +70,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/landingpage") ? "bg-accent text-foreground" : "text-primary"
                   )}
                 >
                   <Link to="/landingpage">Home</Link>
@@ -75,7 +81,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/SearchEvents") ? "bg-accent text-foreground" : "text-primary"
                   )}
                 >
                   <Link to="/SearchEvents">Events</Link>
@@ -85,18 +92,19 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/registeredEvents") ? "bg-accent text-foreground" : "text-primary"
                   )}
                 >
                   <Link to="/registeredEvents">Registration</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
-
               <NavigationMenuItem>
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/posts") ? "bg-accent text-foreground" : "text-primary"
                   )}
                 >
                   <Link to="/posts">Forums</Link>
@@ -106,7 +114,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/searchpeople") ? "bg-accent text-foreground" : "text-primary"
                   )}
                 >
                   <Link to="/searchpeople">People</Link>
@@ -116,7 +125,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/chatscreen") ? "bg-accent text-foreground" : "text-primary"
                   )}
                 >
                   <Link to="/chatscreen">Chat</Link>
@@ -126,7 +136,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/edit-profile") ? "bg-accent text-foreground" : "text-primary"
                   )}
                 >
                   <Link to="/edit-profile">Profile</Link>
@@ -178,7 +189,7 @@ const Navbar = () => {
 
         {/* Light/Dark Mode Toggle */}
         <div className="hidden md:flex items-center ml-4">
-          <ModeToggle /> {/* Add ModeToggle button */}
+          <ModeToggle />
         </div>
 
         {/* Mobile Menu Button */}
@@ -211,7 +222,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/landingpage") ? "bg-accent text-foreground" : ""
                   )}
                 >
                   <Link to="/landingpage" onClick={handleLinkClick}>
@@ -223,7 +235,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/SearchEvents") ? "bg-accent text-foreground" : ""
                   )}
                 >
                   <Link to="/SearchEvents" onClick={handleLinkClick}>
@@ -235,7 +248,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/registeredEvents") ? "bg-accent text-foreground" : ""
                   )}
                 >
                   <Link to="/registeredEvents" onClick={handleLinkClick}>
@@ -247,19 +261,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
-                  )}
-                >
-                  <Link to="/edit-profile" onClick={handleLinkClick}>
-                    Profile
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/posts") ? "bg-accent text-foreground" : ""
                   )}
                 >
                   <Link to="/posts" onClick={handleLinkClick}>
@@ -271,7 +274,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/searchpeople") ? "bg-accent text-foreground" : ""
                   )}
                 >
                   <Link to="/searchpeople" onClick={handleLinkClick}>
@@ -283,7 +287,8 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/chatscreen") ? "bg-accent text-foreground" : ""
                   )}
                 >
                   <Link to="/chatscreen" onClick={handleLinkClick}>
@@ -291,48 +296,31 @@ const Navbar = () => {
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md",
+                    isActive("/edit-profile") ? "bg-accent text-foreground" : ""
+                  )}
+                >
+                  <Link to="/edit-profile" onClick={handleLinkClick}>
+                    Profile
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
-            {/* Mobile Dropdown Icon */}
-            <div className="mt-4 p-4 border-t border-muted">
-              <button onClick={toggleDropdown} className="flex items-center">
-                {profileImage ? (
-                  <img
-                    src={profileImage}
-                    alt="User Profile"
-                    className="w-8 h-8 rounded-full"
-                  />
-                ) : (
-                  <FaUserCircle
-                    size={30}
-                    className="text-primary hover:text-accent-foreground"
-                  />
-                )}
-              </button>
-              {isDropdownOpen && (
-                <div className="mt-2 bg-card border border-muted shadow-lg rounded-md">
-                  <ul className="text-sm">
-                    <li>
-                      <Link
-                        to="/edit-profile"
-                        className="block px-4 py-2 text-card-foreground hover:bg-secondary"
-                      >
-                        Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <button
-                        onClick={logout}
-                        className="block px-4 py-2 text-red-600 hover:bg-secondary w-full text-left"
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-            <ModeToggle /> {/* Add ModeToggle button */}
           </NavigationMenu>
+
+          <div className="flex flex-col items-center justify-center p-4">
+            <ModeToggle />
+            <button
+              onClick={logout}
+              className="mt-4 text-red-600 hover:bg-secondary w-full text-left p-2 rounded-md"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </div>

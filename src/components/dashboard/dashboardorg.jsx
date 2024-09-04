@@ -22,7 +22,7 @@ export default function Landing() {
           <p className="text-xl mb-8 drop-shadow-md">
             Everything you need to manage your events effectively and connect with others.
           </p>
-          <Link to="/login"> <Button className="bg-yellow-500 text-black py-2 px-4 rounded shadow-md">
+          <Link to="/landingOrg"> <Button className="bg-yellow-500 text-black py-2 px-4 rounded shadow-md">
             Get Started
           </Button></Link>
           <div className="flex items-center justify-center mt-8">

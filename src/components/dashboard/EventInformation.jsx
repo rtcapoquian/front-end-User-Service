@@ -202,7 +202,7 @@ const EventInformation = () => {
           </div>
           <p className="text-lg mb-6">
             Organizer:{" "}
-            <Link to={`/profile/${organizer._id}`} className="text-primary">
+            <Link to={`/gotoprofile/${organizer._id}`} className="text-primary">
               {organizer.name}
             </Link>
           </p>

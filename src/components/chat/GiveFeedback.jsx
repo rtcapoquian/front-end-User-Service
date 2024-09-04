@@ -42,6 +42,7 @@ const GiveFeedback = () => {
           message: "Feedback submitted successfully!",
           isSubmitted: true,
         }));
+        navigate("/SearchEvents")
       })
       .catch((error) => {
         console.log(error);

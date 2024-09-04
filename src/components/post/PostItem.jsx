@@ -63,7 +63,7 @@ const PostItem = ({ post, onPostUpdated }) => {
   return (
     <Card className="p-4 mb-4 bg-background shadow-md mx-auto max-w-2xl">
       <div className="flex items-center justify-between mb-2">
-       <Link to={`/profile/${post.user}`}> <h4 className="text-lg font-semibold text-blue-500">{post.name}</h4></Link>
+       <Link to={`/gotoprofile/${post.user}`}> <h4 className="text-lg font-semibold text-blue-500">{post.name}</h4></Link>
         <span className="text-sm text-gray-500">{formatDate(post.date)}</span>
       </div>
       <p className="mb-8">{post.text}</p>

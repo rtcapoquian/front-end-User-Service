@@ -31,7 +31,8 @@ const ProfileInformation = () => {
         setUser(userResponse.data || {});
       } catch (error) {
         console.error("Error fetching profile data:", error);
-        setError("Failed to fetch profile data.");
+        setError("Profile not set up yet for this user.");
+
       } finally {
         setLoading(false);
       }

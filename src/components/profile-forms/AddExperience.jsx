@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import api from "../../api"; // Import the API instance
-
+import { useNavigate } from "react-router-dom";
 const AddExperience = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     company: "",
     title: "",
@@ -29,6 +30,7 @@ const AddExperience = () => {
       await api.put("/api/profile/experience", formData); // Update this URL to match your API endpoint
       setSuccessMessage("Experience details added successfully!");
       setErrorMessage(""); // Clear any previous error message
+      navigate("/edit-profile");
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("Error adding experience details. Please try again.");
