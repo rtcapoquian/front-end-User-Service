@@ -3,27 +3,32 @@ import api from "../../api";
 import socket from "../../socket";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { FaUser, FaComments } from "react-icons/fa";
+import UserImage from "./UserImage";
+
+const defaultProfileImage = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg";
 
 const MessengerApp = () => {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [myusername, setMyusername] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const endOfMessagesRef = useRef(null); // Reference for scrolling to the bottom
 
   useEffect(() => {
-    // Fetch users
+    // Fetch users and profiles
     const fetchData = async () => {
       try {
         const userRes = await api.get("/api/users");
         setUsers(userRes.data);
+        setFilteredUsers(userRes.data); // Initialize filtered users
       } catch (err) {
         console.error("Error fetching users:", err.message);
       }
     };
     fetchData();
-
     // Join chat room and listen for messages
     const userId = localStorage.getItem("user_id");
     if (userId) {
@@ -38,13 +43,21 @@ const MessengerApp = () => {
       socket.off("chatMessage");
     };
   }, []);
-
+  
   useEffect(() => {
     // Scroll to the bottom when messages change
     if (endOfMessagesRef.current) {
       endOfMessagesRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
+  useEffect(() => {
+    // Filter users based on search query
+    const filtered = users.filter(user =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredUsers(filtered);
+  }, [searchQuery, users]);
 
   const handleUserSelect = (userId, username) => {
     setMyusername(username);
@@ -89,15 +102,23 @@ const MessengerApp = () => {
             <FaUser className="w-6 h-6 mr-2" />
             Users
           </h2>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search users..."
+            className="mb-4 p-2 border rounded dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
+          />
           <ScrollArea className="h-[calc(85vh-10rem)] rounded-md border-none p-2">
             <ul className="list-none p-0">
-              {users.map((user) => (
+              {filteredUsers.map((user) => (
                 <li
                   key={user._id}
                   onClick={() => handleUserSelect(user._id, user.name)}
                   className="cursor-pointer hover:bg-gray-200 p-2 rounded flex items-center dark:hover:bg-gray-700"
                 >
-                  <FaUser className="w-6 h-6 mr-2" />
+                 
+                  <UserImage userId={user._id} />
                   {user.name}
                 </li>
               ))}
@@ -113,23 +134,24 @@ const MessengerApp = () => {
                   <FaComments className="w-6 h-6 mr-2" />
                   {myusername}
                 </h3>
+                {/* chat window */}
                 <ScrollArea className="h-[calc(85vh-10rem)] rounded-md border-none p-2">
                   <div className="space-y-4">
                     {messages.map((msg, index) => (
                       <div
                         key={index}
                         className={`flex ${
-                          msg.sender === localStorage.getItem("user_id")
+                          (msg.sender._id || msg.sender) === localStorage.getItem("user_id")
                             ? "justify-end"
                             : "justify-start"
                         }`}
                       >
                         <div
                           className={`p-2 rounded-lg max-w-xs ${
-                            msg.sender === localStorage.getItem("user_id")
-                              ? "bg-blue-500 text-white"
-                              : "bg-gray-200 text-gray-800"
-                          } dark:bg-gray-700 dark:text-gray-100`}
+                            (msg.sender._id || msg.sender) === localStorage.getItem("user_id")
+                              ? "bg-blue-500 text-white dark:bg-blue-600 dark:text-gray-100"
+                              : "bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-300"
+                          }`}
                         >
                           {msg.message}
                         </div>

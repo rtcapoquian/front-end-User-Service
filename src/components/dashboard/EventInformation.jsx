@@ -30,6 +30,7 @@ const EventInformation = () => {
       profileUrl: "",
     },
     registeredCount: 0,
+    status: "", // Added to store event status
   });
 
   const userId = localStorage.getItem("user_id");
@@ -65,9 +66,14 @@ const EventInformation = () => {
           address: event.address,
           stringDates: [eventDate.toISOString().split("T")[0], event.time],
           registeredCount,
-          showMessage: isFull || event.status === "Completed" || event.status === "Cancelled",
-          disabled1: event.status === "Completed" || event.status === "Cancelled",
+          showMessage:
+            isFull ||
+            event.status === "Completed" ||
+            event.status === "Cancelled",
+          disabled1:
+            event.status === "Completed" || event.status === "Cancelled",
           organizer: event.organizer,
+          status: event.status, // Set the event status
         }));
 
         return api.get(`/api/events/${id}/attendees/${userId}`);
@@ -102,7 +108,10 @@ const EventInformation = () => {
               ? "You have been added to the waiting list. The organizer will approve your registration if a spot becomes available."
               : "You have been successfully registered. Please wait for a confirmation email.",
           registeredCount,
-          showMessage: isFull || response.data.status === "Completed" || response.data.status === "Cancelled",
+          showMessage:
+            isFull ||
+            response.data.status === "Completed" ||
+            response.data.status === "Cancelled",
         }));
       })
       .catch((error) => console.log(error));
@@ -118,7 +127,8 @@ const EventInformation = () => {
           disabled1: false,
           registrationMessage: "Your registration has been cancelled.",
           registeredCount: prev.registeredCount - 1,
-          showMessage: prev.registeredCount - 1 >= prev.capacity || prev.disabled1,
+          showMessage:
+            prev.registeredCount - 1 >= prev.capacity || prev.disabled1,
         }));
       })
       .catch((error) => console.log(error));
@@ -130,7 +140,11 @@ const EventInformation = () => {
     return (
       <div className="my-6">
         {attendeeStatus ? (
-          <Button onClick={handleDeregister} disabled={disabled1} variant="outline">
+          <Button
+            onClick={handleDeregister}
+            disabled={disabled1}
+            variant="outline"
+          >
             Cancel Registration
           </Button>
         ) : (
@@ -155,6 +169,7 @@ const EventInformation = () => {
     registrationMessage,
     organizer,
     registeredCount,
+    status,
   } = eventDetails;
 
   return (
@@ -175,25 +190,48 @@ const EventInformation = () => {
           <div className="flex items-center mb-6">
             <FaUsers className="text-primary mr-3" />
             <p className="text-lg">Capacity: {capacity}</p>
-            <p className={`text-lg ml-6 ${registeredCount >= capacity ? "text-destructive" : "text-primary"}`}>
+            <p
+              className={`text-lg ml-6 ${
+                registeredCount >= capacity
+                  ? "text-destructive"
+                  : "text-primary"
+              }`}
+            >
               Registered: {registeredCount}
             </p>
           </div>
           <p className="text-lg mb-6">
-            Organizer: <Link to={`/profile/${organizer._id}`} className="text-primary">{organizer.name}</Link>
+            Organizer:{" "}
+            <Link to={`/profile/${organizer._id}`} className="text-primary">
+              {organizer.name}
+            </Link>
           </p>
 
           {renderRegisterButton()}
 
           {registrationMessage && (
             <Alert variant="info" className="my-6">
-              <AlertTitle>{showMessage ? "Registration Status" : ""}</AlertTitle>
+              <AlertTitle>
+                {showMessage ? "Registration Status" : ""}
+              </AlertTitle>
               <AlertDescription>{registrationMessage}</AlertDescription>
             </Alert>
           )}
+
+          {status === "Completed" && (
+            <div className="my-6">
+              <Link to={`/givefeedback/${id}`} className="text-primary">
+                <Button variant="outline">Give Feedback</Button>
+              </Link>
+            </div>
+          )}
         </Card>
-        <div className="w-full  flex-1 p-4">
-          <MapComponent latitude={latitude} longitude={longitude} className="w-full h-full z-10" />
+        <div className="w-full flex-1 p-4">
+          <MapComponent
+            latitude={latitude}
+            longitude={longitude}
+            className="w-full h-full z-10"
+          />
         </div>
       </div>
     </div>

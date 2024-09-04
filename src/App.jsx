@@ -43,11 +43,44 @@ import ProfileInformation from "./components/dashboard/ProfileInformation";
 import EditEvent from "./components/profile-forms/EditEvent";
 import ScanQr from "./components/profile-forms/ScanQr";
 import Chatscreen from "./components/chat/Chatscreen";
+import GiveFeedback from "./components/chat/GiveFeedback";
+import EventFeedback from "./components/EventOrginfo/EventFeedback";
+import PostsOrg from "./components/postorg/Posts";
+import PostOrg from "./components/postsorg/Post";
+import SearchPeopleOrg from "./components/chat/SearchPeopleOrg";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route
+            exact
+            path="/postsorg/:id"
+            element={
+              <>
+                <NavbarOrg />
+                <PostOrg />
+              </>
+            }
+          />
+          <Route
+            path="/feedback/:event_id/:user_id"
+            element={
+              <>
+                <NavbarOrg />
+                <EventFeedback />
+              </>
+            }
+          />
+          <Route
+            path="/givefeedback/:id"
+            element={
+              <>
+                <Navbar />
+                <GiveFeedback />
+              </>
+            }
+          />
           <Route exact path="/" element={<Landing />} />
           {/* ROutes */}
           <Route exact path="/login" element={<Login />} />
@@ -123,7 +156,7 @@ function App() {
             element={
               <>
                 <NavbarOrg />
-                <Posts />
+                <PostsOrg />
               </>
             }
           />
@@ -176,7 +209,7 @@ function App() {
             element={
               <>
                 <NavbarOrg />
-                <SearchPeople />
+                <SearchPeopleOrg />
               </>
             }
           />
@@ -185,6 +218,15 @@ function App() {
             element={
               <>
                 <Navbar />
+                <ProfileInformation />
+              </>
+            }
+          />
+          <Route
+            path="/gotoprofileorg/:id"
+            element={
+              <>
+                <NavbarOrg />
                 <ProfileInformation />
               </>
             }

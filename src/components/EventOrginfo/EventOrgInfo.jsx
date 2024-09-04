@@ -283,7 +283,7 @@ const EventOrgInfo = () => {
                 <TableRow key={attendee._id}>
                   <TableCell>
                     <Link
-                      to={`/profile/${attendee.user._id}`}
+                      to={`/gotoprofileorg/${attendee.user._id}`}
                       className="text-blue-500 hover:underline"
                     >
                       {attendee.user.name}
@@ -344,7 +344,7 @@ const EventOrgInfo = () => {
             >
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Finalize Registrations</DialogTitle>
+                  <DialogTitle className="text-foreground">Finalize Registrations</DialogTitle>
                   <DialogDescription>
                     Are you sure you want to finalize the registrations for this
                     event? This action cannot be undone.

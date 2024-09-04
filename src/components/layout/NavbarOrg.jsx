@@ -52,7 +52,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-background text-foreground p-4 shadow-md">
+    <div className="bg-background text-foreground p-4 border dark:border-none">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo/Title */}
         <Link to="/dashboardOrg" className="text-2xl font-bold flex-shrink-0">

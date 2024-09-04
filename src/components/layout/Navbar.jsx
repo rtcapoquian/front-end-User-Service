@@ -50,7 +50,7 @@ const Navbar = () => {
     setMenuOpen(false); // Close the menu on link click
   };
   return (
-    <div className="bg-background text-foreground p-4 shadow-md">
+    <div className="bg-background text-foreground p-4 border dark:border-none">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo/Title */}
         <Link to="/landingpage" className="text-2xl font-bold flex-shrink-0">
