@@ -36,7 +36,7 @@ const Navbar = () => {
 
     fetchProfileImage();
   }, []);
-  console.log(profileImage)
+  console.log(profileImage);
   const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
@@ -139,7 +139,7 @@ const Navbar = () => {
         {/* Desktop Dropdown Icon */}
         <div className="hidden md:flex items-center relative">
           <button onClick={toggleDropdown} className="flex items-center ml-4">
-          {profileImage ? (
+            {profileImage ? (
               <img
                 src={profileImage}
                 alt="User Profile"
@@ -214,7 +214,9 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/landingpage"   onClick={handleLinkClick}>Home</Link>
+                  <Link to="/landingpage" onClick={handleLinkClick}>
+                    Home
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -224,7 +226,9 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/SearchEvents"  onClick={handleLinkClick}>Events</Link>
+                  <Link to="/SearchEvents" onClick={handleLinkClick}>
+                    Events
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -234,7 +238,9 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/registeredEvents"  onClick={handleLinkClick}>Registration</Link>
+                  <Link to="/registeredEvents" onClick={handleLinkClick}>
+                    Registration
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -244,7 +250,9 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/edit-profile"  onClick={handleLinkClick}>Profile</Link>
+                  <Link to="/edit-profile" onClick={handleLinkClick}>
+                    Profile
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -254,7 +262,9 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/posts"  onClick={handleLinkClick}>Forums</Link>
+                  <Link to="/posts" onClick={handleLinkClick}>
+                    Forums
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -264,7 +274,9 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/searchpeople"  onClick={handleLinkClick}>People</Link>
+                  <Link to="/searchpeople" onClick={handleLinkClick}>
+                    People
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -274,25 +286,27 @@ const Navbar = () => {
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
-                  <Link to="/chatscreen"  onClick={handleLinkClick}>Chat</Link>
+                  <Link to="/chatscreen" onClick={handleLinkClick}>
+                    Chat
+                  </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
             {/* Mobile Dropdown Icon */}
             <div className="mt-4 p-4 border-t border-muted">
               <button onClick={toggleDropdown} className="flex items-center">
-              {profileImage ? (
-              <img
-                src={profileImage}
-                alt="User Profile"
-                className="w-8 h-8 rounded-full"
-              />
-            ) : (
-              <FaUserCircle
-                size={30}
-                className="text-primary hover:text-accent-foreground"
-              />
-            )}
+                {profileImage ? (
+                  <img
+                    src={profileImage}
+                    alt="User Profile"
+                    className="w-8 h-8 rounded-full"
+                  />
+                ) : (
+                  <FaUserCircle
+                    size={30}
+                    className="text-primary hover:text-accent-foreground"
+                  />
+                )}
               </button>
               {isDropdownOpen && (
                 <div className="mt-2 bg-card border border-muted shadow-lg rounded-md">

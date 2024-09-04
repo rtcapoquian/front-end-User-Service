@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { API_URL } from "../../API_URL";
-
+import Slideshow from "../layout/Slideshow";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -22,7 +22,7 @@ const Login = () => {
     const userId = localStorage.getItem("user_id");
     if (token && userType) {
       if (userType === "Organizer") {
-        navigate("/dashboardOrg");
+        navigate("/landingOrg");
       } else if (userType === "Attendee") {
         navigate("/landingpage");
       }
@@ -70,66 +70,54 @@ const Login = () => {
 
   return (
     <Fragment>
-      <section className="formslayout">
-        <div className="formslayout-inner">
-          <div className="page">
-            <div className="login">
-              <div className="formulaire">
-                <h2 className="text-center" style={{ color: "black" }}>
-                  Login
-                </h2>
-                <form onSubmit={onSubmit}>
-                  <input
-                    type="email"
-                    style={{
-                      height: "35px",
-                      border: "none",
-                      marginBottom: "10px",
-                    }}
-                    placeholder="Email Address"
-                    name="email"
-                    value={email}
-                    onChange={onChange}
-                    required
-                  />
-                  <input
-                    type="password"
-                    style={{
-                      height: "35px",
-                      border: "none",
-                      marginBottom: "10px",
-                    }}
-                    placeholder="Password"
-                    name="password"
-                    value={password}
-                    onChange={onChange}
-                    required
-                  />
-                  <input
-                    type="submit"
-                    style={{
-                      height: "35px",
-                      marginTop: "20px",
-                      width: "30%",
-                      backgroundColor: "#17a2b8",
-                      fontSize: "1.2rem",
-                      color: "black",
-                      cursor: loading ? "not-allowed" : "pointer",
-                    }}
-                    value={loading ? "Logging in..." : "Login"}
-                    disabled={loading}
-                  />
-                  <p className="forgot" style={{ color: "black" }}>
-                    Don't have an account? <Link to="/register">Register</Link>
-                  </p>
-                  <p className="forgot" style={{ color: "black" }}>
-                    Forgot your password?{" "}
-                    <Link to="/Sende">Reset Password</Link>
-                  </p>
-                </form>
-                {error && <p style={{ color: "red" }}>{error}</p>}
-              </div>
-            </div>
+      <section className="flex flex-col md:flex-row min-h-screen">
+        <div className="w-full md:w-1/2 relative">
+          <Slideshow />
+        </div>
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 text-foreground">
+          <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-md w-full text-center">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+              Login
+            </h2>
+            <form onSubmit={onSubmit} className="space-y-6">
+              <input
+                type="email"
+                placeholder="Email Address"
+                name="email"
+                value={email}
+                onChange={onChange}
+                className="block w-full p-2 border rounded focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={onChange}
+                className="block w-full p-2 border rounded focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                required
+              />
+              <input
+                type="submit"
+                value={loading ? "Logging in..." : "Login"}
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md transition-colors duration-300 py-2"
+                disabled={loading}
+              />
+              <p className="text-gray-700 dark:text-gray-300">
+                Don't have an account?{" "}
+                <Link to="/register" className="text-blue-500 hover:text-blue-600">
+                  Register
+                </Link>
+              </p>
+              <p className="text-gray-700 dark:text-gray-300">
+                Forgot your password?{" "}
+                <Link to="/Sende" className="text-blue-500 hover:text-blue-600">
+                  Reset Password
+                </Link>
+              </p>
+            </form>
+            {error && <p className="text-red-500 mt-4">{error}</p>}
           </div>
         </div>
       </section>

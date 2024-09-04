@@ -48,11 +48,36 @@ import EventFeedback from "./components/EventOrginfo/EventFeedback";
 import PostsOrg from "./components/postorg/Posts";
 import PostOrg from "./components/postsorg/Post";
 import SearchPeopleOrg from "./components/chat/SearchPeopleOrg";
+import AboutUs from "./components/auth/AboutUs";
+import Contact from "./components/auth/Contact";
+import RegistrationManagement from "./components/features/registration-management";
+import ProfileManagement from "./components/features/profile-management";
+import EventSearch from "./components/features/event-search";
+import FeedbackForums from "./components/features/feedback-forums";
+import ForumsDetails from "./components/features/forums-details";
+import AdvancedFeatures from "./components/features/advanced-features";
+
+
 function App() {
   return (
     <>
       <BrowserRouter>
+    
         <Routes>
+          <Route exact path="/features/advanced-features" element={<AdvancedFeatures />} />
+          <Route exact path="/features/feedback-forums" element={<FeedbackForums />} />
+          <Route exact path="/features/forums-details" element={<ForumsDetails />} />
+          <Route exact path="/features/event-search" element={<EventSearch />} />
+          <Route exact path="/features/profile-management" element={<ProfileManagement />} />
+          <Route exact path="/features/registration-management" element={<RegistrationManagement />} />
+          <Route
+            exact
+            path="/registration-management"
+            element={<RegistrationManagement />}
+          />
+
+          <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/about" element={<AboutUs />} />
           <Route
             exact
             path="/postsorg/:id"

@@ -43,61 +43,42 @@ const Resetpass = () => {
 
   return (
     <Fragment>
-      <section className="formslayout">
-        <div className="formslayout-inner">
-          <div className="page">
-            <div className="reset-password">
-              <div className="formulaire">
-                <h2 className="text-center" style={{ color: "black" }}>
-                  Reset Password
-                </h2>
-                <form onSubmit={onSubmit}>
-                  <input
-                    type="email"
-                    style={{
-                      height: "35px",
-                      border: "none",
-                      marginBottom: "10px",
-                    }}
-                    placeholder="Email Address"
-                    name="email"
-                    value={email}
-                    onChange={onChange}
-                    required
-                  />
-                  <input
-                    type="password"
-                    style={{
-                      height: "35px",
-                      border: "none",
-                      marginBottom: "10px",
-                    }}
-                    placeholder="New Password"
-                    name="password"
-                    value={password}
-                    onChange={onChange}
-                    required
-                  />
-                  <input
-                    type="submit"
-                    style={{
-                      height: "35px",
-                      marginTop: "20px",
-                      width: "30%",
-                      backgroundColor: "#17a2b8",
-                      fontSize: "1.2rem",
-                      color: "black",
-                      cursor: loading ? "not-allowed" : "pointer",
-                    }}
-                    value={loading ? "Resetting..." : "Reset Password"}
-                    disabled={loading}
-                  />
-                  {success && <p style={{ color: "green" }}>{success}</p>}
-                  {error && <p style={{ color: "red" }}>{error}</p>}
-                </form>
-              </div>
-            </div>
-          </div>
+      <section className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+            Reset Password
+          </h2>
+          <form onSubmit={onSubmit} className="space-y-4">
+            <input
+              type="email"
+              placeholder="Email Address"
+              name="email"
+              value={email}
+              onChange={onChange}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+            <input
+              type="password"
+              placeholder="New Password"
+              name="password"
+              value={password}
+              onChange={onChange}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-2 ${
+                loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"
+              } text-white rounded-md`}
+            >
+              {loading ? "Resetting..." : "Reset Password"}
+            </button>
+            {success && <p className="text-green-500 text-center">{success}</p>}
+            {error && <p className="text-red-500 text-center">{error}</p>}
+          </form>
         </div>
       </section>
     </Fragment>
