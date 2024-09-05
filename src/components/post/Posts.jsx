@@ -44,7 +44,7 @@ const Posts = () => {
       </header>
       
       {/* Search form with icon */}
-      <div className="mb-4 flex items-center space-x-2">
+      <div className="mb-4 flex items-center space-x-2 text-foreground">
         <Input
           type="text"
           placeholder="Search posts..."

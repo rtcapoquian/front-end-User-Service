@@ -1,7 +1,7 @@
 // src/socket.js
 import { io } from "socket.io-client";
 
-// const socket = io("https://d1z4jk391q4erq.cloudfront.net", {
+// const socket = io("http://3.27.140.76:5000", {
 //   transports: ["websocket", "polling"],
 // });
 
