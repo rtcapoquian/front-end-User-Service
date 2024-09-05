@@ -148,7 +148,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Dropdown Icon */}
-        <div className="hidden md:flex items-center relative">
+        <div className="hidden md:flex items-center relative z-10">
           <button onClick={toggleDropdown} className="flex items-center ml-4">
             {profileImage ? (
               <img

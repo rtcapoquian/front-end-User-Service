@@ -72,7 +72,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/dashboardOrg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/dashboardOrg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -83,7 +85,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/landingOrg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/landingOrg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -95,7 +99,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/postsorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/postsorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -106,7 +112,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/searchpeopleorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/searchpeopleorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -117,7 +125,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/chatscreenorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/chatscreenorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -128,7 +138,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/edit-profileorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/edit-profileorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -140,7 +152,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Dropdown Icon */}
-        <div className="hidden md:flex items-center relative">
+        <div className="hidden md:flex items-center relative z-30">
           <button onClick={toggleDropdown} className="flex items-center ml-4">
             {profileImage ? (
               <img
@@ -214,7 +226,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/dashboardOrg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/dashboardOrg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -227,7 +241,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/landingOrg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/landingOrg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -240,7 +256,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/edit-profileorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/edit-profileorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -253,7 +271,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/postsorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/postsorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -266,7 +286,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/searchpeopleorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/searchpeopleorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -279,7 +301,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/chatscreenorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/chatscreenorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >
@@ -292,7 +316,9 @@ const Navbar = () => {
                 <NavigationMenuLink
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    isActiveLink("/edit-profileorg") ? "bg-accent text-accent-foreground" : "text-primary",
+                    isActiveLink("/edit-profileorg")
+                      ? "bg-accent text-accent-foreground"
+                      : "text-primary",
                     "text-lg hover:bg-accent px-4 py-2 rounded-md"
                   )}
                 >

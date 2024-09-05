@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import api from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = (dateString) => {
   if (!dateString) return "Not Specified";
@@ -48,6 +49,7 @@ const EditProfile = () => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -93,6 +95,7 @@ const EditProfile = () => {
       await api.post("/api/profile", formData);
       setMessage("Profile updated successfully!");
       setError("");
+      navigate("/SearchEvents");
     } catch (error) {
       console.error("Error updating profile:", error);
       setError("Error updating profile. Please try again.");

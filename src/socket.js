@@ -1,7 +1,7 @@
 // src/socket.js
 import { io } from "socket.io-client";
 
-// const socket = io("http://3.27.140.76:5000", {
+// const socket = io("https://fwx3gydbmv.ap-southeast-2.awsapprunner.com", {
 //   transports: ["websocket", "polling"],
 // });
 

@@ -14,7 +14,7 @@ const ChatBot = () => {
   const messageEndRef = useRef(null);
 
   const userType = localStorage.getItem("userType");
-if (userType !== "Attendee") return null
+  if (userType !== "Attendee") return null;
   // Do not display ChatBot if userType is not "attendee"
 
   useEffect(() => {
@@ -56,8 +56,11 @@ if (userType !== "Attendee") return null
       // Start typing simulation
       typingIntervalId = simulateTyping(text);
     } catch (error) {
-      console.error("Error sending message:", error);
-      setResponse("Error sending message");
+      console.error(
+        "Fill up your profile information first to use this:",
+        error
+      );
+      setResponse("Fill up your profile information first to use this.");
     } finally {
       setLoading(false);
       setMessage("");
@@ -76,7 +79,7 @@ if (userType !== "Attendee") return null
 
       {/* Chatbot Popup */}
       {isOpen && (
-        <Card className="fixed bottom-16 right-6 w-full max-w-md h-[600px] flex flex-col border shadow-lg bg-background text-gray-800  dark:text-gray-100 z-50">
+        <Card className="fixed bottom-16 right-6 w-[85%] max-w-xs sm:max-w-md   h-[80vh] sm:h-[70vh] md:h-[68vh] lg:h-[68vh] flex flex-col border shadow-lg bg-background text-gray-800 dark:text-gray-100 z-50">
           {/* Header */}
           <div className="flex justify-between items-center p-4 border-b border-gray-300 dark:border-gray-700">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
