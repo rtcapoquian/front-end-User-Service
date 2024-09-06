@@ -40,11 +40,17 @@ To start using the app, visit [www.eventcs.com](http://www.eventcs.com).
 
 The app includes the following main sections:
 
+  **Home Page:** Welcome page with a hero section, search bar, and featured events.
   ![Home Page](images/both/home.png)
+  **Events:** Browse and search for events.
   ![Events Page](images/atendee/events.png)
+  **Profile:** Manage user profile information.
   ![Profile Page](images/both/profileinfo.png)
+  **Forums:** Participate in event-related discussions.
   ![Forums](images/both/forum.png)
+  **People:** Search for and connect with other users.
   ![People](images/both/people.png)
+  **Chat:** Communicate with other users in real-time.
   ![Chat](images/both/converse%202.PNG)
 
 ## 4. Managing Events
