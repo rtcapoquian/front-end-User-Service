@@ -28,7 +28,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { FaSortUp, FaSortDown } from "react-icons/fa";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-
+import ChatBotOrg from "@/ChatBotOrg.jsx";
 const statusColors = {
   WaitingList: "bg-yellow-200 text-yellow-800",
   Registered: "bg-green-200 text-green-800",
@@ -159,9 +159,11 @@ const EventOrgInfo = () => {
 
   return (
     <div className="container mx-auto p-4 text-foreground">
+<ChatBotOrg id={id}/>
       {event && (
         <div className="card p-4 rounded-xl border bg-card text-card-foreground shadow">
           <div className="mb-4">
+            
             <img
               src={event.image || "https://via.placeholder.com/800x400"}
               alt={event.name}

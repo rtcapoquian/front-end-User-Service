@@ -166,36 +166,24 @@ const ProfileInformation = () => {
             <Card className="p-8 shadow-lg">
               <h2 className="text-xl font-semibold mb-4">Profile Details</h2>
               <div className="flex flex-col gap-4">
+           
+       
                 <p className="flex items-center">
-                  <FaGlobe className="mr-2" />{" "}
-                  <a
-                    href={website || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500"
-                  >
-                    {website || "Website not available"}
-                  </a>
-                </p>
-                <p className="flex items-center">
-                  <FaBuilding className="mr-2" /> <strong>Company:</strong>{" "}
-                  {company || "Not available"}
-                </p>
-                <p className="flex items-center">
-                  <FaMapMarkerAlt className="mr-2" /> <strong>Location:</strong>{" "}
+                  <FaMapMarkerAlt className="mr-2" /> <strong>Location:</strong>{" "}&nbsp;
                   {location || "Not available"}
                 </p>
                 <p className="flex items-center">
-                  <FaInfoCircle className="mr-2" /> <strong>Status:</strong>{" "}
+                  <FaInfoCircle className="mr-2" /> <strong>Interest:</strong>{" "}&nbsp;
                   {status || "Not available"}
                 </p>
                 <p className="flex items-center">
-                  <FaStar className="mr-2" /> <strong>Skills:</strong>{" "}
+                  <FaStar className="mr-2" /> <strong>Skills:</strong>&nbsp;
                   {skills.length > 0 ? skills.join(", ") : "Not available"}
                 </p>
                 <p className="flex items-center">
-                  <FaInfoCircle className="mr-2" /> <strong>Bio:</strong>{" "}
-                  {bio || "Not available"}
+                  <FaInfoCircle className="mr-2" /> <strong>Professional Bio</strong>
+                </p><p className="">
+                {" "}{bio || "Not available"}
                 </p>
               </div>
             </Card>

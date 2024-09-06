@@ -6,7 +6,7 @@ import BotProp from "./BotProp";
 
 let typingIntervalId = null;
 
-const ChatBot = () => {
+const ChatBot = ({ id }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
@@ -14,8 +14,8 @@ const ChatBot = () => {
   const messageEndRef = useRef(null);
 
   const userType = localStorage.getItem("userType");
-  if (userType !== "Attendee") return null;
-  // Do not display ChatBot if userType is not "attendee"
+  if (userType !== "Organizer") return null;
+  // Do not display ChatBot if userType is not "ChatbotOrg"
 
   useEffect(() => {
     if (isOpen && messageEndRef.current) {
@@ -31,7 +31,7 @@ const ChatBot = () => {
         clearInterval(intervalId);
         return;
       }
-      setResponse((prev) => currentResponse);
+      setResponse((prev) => currentResponse );
       currentResponse += text[index];
       index += 1;
     }, delay);
@@ -50,7 +50,9 @@ const ChatBot = () => {
     }
 
     try {
-      const result = await api.post("/api/awsbot", { userMessage: message });
+      const result = await api.post(`/api/awsbotorg/${id}`, {
+        userMessage: message,
+      });
       const text = result.data.response;
       setResponse(""); // Clear previous response
       // Start typing simulation
@@ -97,7 +99,6 @@ const ChatBot = () => {
           <div className="flex-1 p-4 overflow-y-auto border">
             <div className="p-2 text-sm rounded-lg bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
               <BotProp response={response} />
-              <div ref={messageEndRef} />
             </div>
           </div>
 

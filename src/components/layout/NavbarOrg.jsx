@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useEffect } from "react";
 import { cn } from "../../lib/utils";
 import {
@@ -19,7 +19,7 @@ const Navbar = () => {
   const [profileImage, setProfileImage] = useState(null);
   const navigate = useNavigate();
   const location = useLocation(); // Get the current URL path
-
+  const dropdownRef = useRef(null); // Ref for dropdown
   useEffect(() => {
     // Fetch profile image URL from API
     const fetchProfileImage = async () => {
@@ -55,7 +55,21 @@ const Navbar = () => {
 
   // Helper function to check if the link is active
   const isActiveLink = (path) => location.pathname === path;
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
 
+    // Add event listener to listen for clicks outside
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Clean up event listener
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
   return (
     <div className="bg-background text-foreground p-4 border dark:border-none">
       <div className="container mx-auto flex items-center justify-between">
@@ -152,7 +166,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Dropdown Icon */}
-        <div className="hidden md:flex items-center relative z-30">
+        <div className="hidden md:flex items-center relative z-30 " ref={dropdownRef}>
           <button onClick={toggleDropdown} className="flex items-center ml-4">
             {profileImage ? (
               <img

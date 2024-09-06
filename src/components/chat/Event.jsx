@@ -39,7 +39,7 @@ const Event = ({ event }) => {
   };
 
   return (
-    <Card className="bg-background shadow-lg rounded-lg overflow-hidden mb-8 mt-4 p-4 border ">
+    <Card className="bg-background shadow-lg rounded-lg overflow-hidden mb-8 mt-4 p-4 border">
       <Link to={`/gotoprofileorg/${event._id}`}>
         <div className="relative w-full h-64 rounded-lg overflow-hidden">
           <img
@@ -50,12 +50,14 @@ const Event = ({ event }) => {
         </div>
       </Link>
       <div className="p-4">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">{event.name || 'User Name'}</h2>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 truncate">{event.name || 'User Name'}</h2>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 flex items-center">
-          <FaLocationArrow className="inline mr-2" size={16} />
+          <FaLocationArrow className="inline mr-2 truncate" size={16} />
           {userProfile?.location || 'Location'}
         </p>
-        <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">{userProfile?.bio || 'No bio available'}</p>
+        <p className="text-sm text-gray-700 dark:text-gray-300 mt-2 line-clamp-2">
+  {userProfile?.bio || 'No bio available'}
+</p>
         {renderSocialLinks()}
       </div>
     </Card>

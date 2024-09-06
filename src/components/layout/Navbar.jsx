@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import api from "@/api";
 import { cn } from "../../lib/utils";
@@ -18,6 +18,7 @@ const Navbar = () => {
   const [profileImage, setProfileImage] = useState(null);
   const location = useLocation(); // Get current location
   const navigate = useNavigate();
+  const dropdownRef = useRef(null); // Ref for dropdown
 
   useEffect(() => {
     const fetchProfileImage = async () => {
@@ -53,7 +54,21 @@ const Navbar = () => {
 
   // Function to check if the current route matches the link path
   const isActive = (path) => location.pathname === path;
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
 
+    // Add event listener to listen for clicks outside
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Clean up event listener
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
   return (
     <div className="bg-background text-foreground p-4 border dark:border-none">
       <div className="container mx-auto flex items-center justify-between">
@@ -71,7 +86,9 @@ const Navbar = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "text-lg hover:bg-accent px-4 py-2 rounded-md",
-                    isActive("/landingpage") ? "bg-accent text-foreground" : "text-primary"
+                    isActive("/landingpage")
+                      ? "bg-accent text-foreground"
+                      : "text-primary"
                   )}
                 >
                   <Link to="/landingpage">Home</Link>
@@ -82,7 +99,9 @@ const Navbar = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "text-lg hover:bg-accent px-4 py-2 rounded-md",
-                    isActive("/SearchEvents") ? "bg-accent text-foreground" : "text-primary"
+                    isActive("/SearchEvents")
+                      ? "bg-accent text-foreground"
+                      : "text-primary"
                   )}
                 >
                   <Link to="/SearchEvents">Events</Link>
@@ -93,7 +112,9 @@ const Navbar = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "text-lg hover:bg-accent px-4 py-2 rounded-md",
-                    isActive("/registeredEvents") ? "bg-accent text-foreground" : "text-primary"
+                    isActive("/registeredEvents")
+                      ? "bg-accent text-foreground"
+                      : "text-primary"
                   )}
                 >
                   <Link to="/registeredEvents">Registration</Link>
@@ -104,7 +125,9 @@ const Navbar = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "text-lg hover:bg-accent px-4 py-2 rounded-md",
-                    isActive("/posts") ? "bg-accent text-foreground" : "text-primary"
+                    isActive("/posts")
+                      ? "bg-accent text-foreground"
+                      : "text-primary"
                   )}
                 >
                   <Link to="/posts">Forums</Link>
@@ -115,7 +138,9 @@ const Navbar = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "text-lg hover:bg-accent px-4 py-2 rounded-md",
-                    isActive("/searchpeople") ? "bg-accent text-foreground" : "text-primary"
+                    isActive("/searchpeople")
+                      ? "bg-accent text-foreground"
+                      : "text-primary"
                   )}
                 >
                   <Link to="/searchpeople">People</Link>
@@ -126,7 +151,9 @@ const Navbar = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "text-lg hover:bg-accent px-4 py-2 rounded-md",
-                    isActive("/chatscreen") ? "bg-accent text-foreground" : "text-primary"
+                    isActive("/chatscreen")
+                      ? "bg-accent text-foreground"
+                      : "text-primary"
                   )}
                 >
                   <Link to="/chatscreen">Chat</Link>
@@ -137,7 +164,9 @@ const Navbar = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "text-lg hover:bg-accent px-4 py-2 rounded-md",
-                    isActive("/edit-profile") ? "bg-accent text-foreground" : "text-primary"
+                    isActive("/edit-profile")
+                      ? "bg-accent text-foreground"
+                      : "text-primary"
                   )}
                 >
                   <Link to="/edit-profile">Profile</Link>
@@ -148,7 +177,10 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Dropdown Icon */}
-        <div className="hidden md:flex items-center relative z-10">
+        <div
+          className="hidden md:flex items-center relative z-10"
+          ref={dropdownRef}
+        >
           <button onClick={toggleDropdown} className="flex items-center ml-4">
             {profileImage ? (
               <img
@@ -249,7 +281,9 @@ const Navbar = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "text-primary text-lg hover:bg-accent px-4 py-2 rounded-md",
-                    isActive("/registeredEvents") ? "bg-accent text-foreground" : ""
+                    isActive("/registeredEvents")
+                      ? "bg-accent text-foreground"
+                      : ""
                   )}
                 >
                   <Link to="/registeredEvents" onClick={handleLinkClick}>

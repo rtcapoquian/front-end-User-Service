@@ -95,7 +95,7 @@ const EditProfile = () => {
       await api.post("/api/profile", formData);
       setMessage("Profile updated successfully!");
       setError("");
-      navigate("/SearchEvents");
+      navigate("/searchpeople");
     } catch (error) {
       console.error("Error updating profile:", error);
       setError("Error updating profile. Please try again.");

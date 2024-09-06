@@ -57,20 +57,46 @@ import FeedbackForums from "./components/features/feedback-forums";
 import ForumsDetails from "./components/features/forums-details";
 import AdvancedFeatures from "./components/features/advanced-features";
 import CharBot from "./ChatBot";
+
+
 function App() {
   return (
     <>
       <BrowserRouter>
-      <CharBot />
-    
+        <CharBot />
+
         <Routes>
           <Route exact path="/chatbot" element={<CharBot />} />
-          <Route exact path="/features/advanced-features" element={<AdvancedFeatures />} />
-          <Route exact path="/features/feedback-forums" element={<FeedbackForums />} />
-          <Route exact path="/features/forums-details" element={<ForumsDetails />} />
-          <Route exact path="/features/event-search" element={<EventSearch />} />
-          <Route exact path="/features/profile-management" element={<ProfileManagement />} />
-          <Route exact path="/features/registration-management" element={<RegistrationManagement />} />
+          <Route
+            exact
+            path="/features/advanced-features"
+            element={<AdvancedFeatures />}
+          />
+          <Route
+            exact
+            path="/features/feedback-forums"
+            element={<FeedbackForums />}
+          />
+          <Route
+            exact
+            path="/features/forums-details"
+            element={<ForumsDetails />}
+          />
+          <Route
+            exact
+            path="/features/event-search"
+            element={<EventSearch />}
+          />
+          <Route
+            exact
+            path="/features/profile-management"
+            element={<ProfileManagement />}
+          />
+          <Route
+            exact
+            path="/features/registration-management"
+            element={<RegistrationManagement />}
+          />
           <Route
             exact
             path="/registration-management"
@@ -287,7 +313,15 @@ function App() {
               </>
             }
           />
-          <Route path="/event/:id/scan-qr" element={<ScanQr />} />
+          <Route
+            path="/event/:id/scan-qr"
+            element={
+              <>
+                <NavbarOrg />
+                <ScanQr />
+              </>
+            }
+          />
           <Route
             path="/event/:eventId/edit"
             element={

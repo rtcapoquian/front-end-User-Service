@@ -220,7 +220,13 @@ const EventList = () => {
           </TableHeader>
           <TableBody>
             {filteredEvents.map((event) => (
-              <TableRow key={event._id}>
+              // onclick navigate to /event/event._id
+              <TableRow
+                key={event._id}
+                onClick={() => {
+                  navigate(`/event/${event._id}`);
+                }}
+              >
                 <TableCell>{event.name}</TableCell>
                 <TableCell>
                   {new Date(event.date).toLocaleDateString()}
