@@ -43,12 +43,15 @@ The app includes the following main sections:
 - **Home Page:** Welcome page with a hero section, search bar, and featured events.
   ![Home Page](images/both/home.png)
 - **Events:** Browse and search for events.
-  ![Events Page](images/events/events.png)
+  ![Events Page](images/atendee/events.png)
 - **Profile:** Manage user profile information.
-  ![Profile Page](images/profile/profile.png)
+  ![Profile Page](images/both/profileinfo.png)
 - **Forums:** Participate in event-related discussions.
+  ![Forums](images/both/forum.png)
 - **People:** Search for and connect with other users.
+  ![People](images/both/people.png)
 - **Chat:** Communicate with other users in real-time.
+  ![Chat](images/both/converse%202.PNG)
 
 ## 4. Managing Events
 
@@ -144,4 +147,8 @@ The Event Management App includes the following features:
 
 ## 11. Contact Support
 
-If you encounter any issues or have any questions, please contact our support team at support@eventcs.com.
+If you encounter any issues or have any questions, please contact our hacker at https://web.facebook.com/rejicapoquian81.
+
+## Here are the images
+
+You can find all the images used in this documentation in the [image repository](https://github.com/rtcapoquian/front-end-User-Service/tree/main/images).
