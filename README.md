@@ -41,8 +41,11 @@ To start using the app, visit [www.eventcs.com](http://www.eventcs.com).
 The app includes the following main sections:
 
 - **Home Page:** Welcome page with a hero section, search bar, and featured events.
+  ![Home Page](images/both/home.png)
 - **Events:** Browse and search for events.
+  ![Events Page](images/events/events.png)
 - **Profile:** Manage user profile information.
+  ![Profile Page](images/profile/profile.png)
 - **Forums:** Participate in event-related discussions.
 - **People:** Search for and connect with other users.
 - **Chat:** Communicate with other users in real-time.
@@ -141,5 +144,4 @@ The Event Management App includes the following features:
 
 ## 11. Contact Support
 
-If you encounter any issues or have any questions, please contact our hacker at
-https://web.facebook.com/rejicapoquian81.
+If you encounter any issues or have any questions, please contact our support team at support@eventcs.com.
