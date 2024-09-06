@@ -16,18 +16,18 @@
 
 ## 1. Introduction
 
-Welcome to the Event Management App! This app allows users to organize, attend, and speak at events. It includes features for event search, registration, profile management, and chat functionalities.
+Welcome to the Event Management App! This application empowers users to organize, attend, and participate in events seamlessly. Key features include event search, registration, profile management, and real-time chat functionality.
 
 ## 2. Getting Started
 
 ### Accessing the App
 
-To start using the app, visit [www.eventcs.com](http://www.eventcs.com).
+To begin using the app, visit [www.eventcs.com](http://www.eventcs.com).
 
 ### Creating an Account
 
 1. Click on the "Sign Up" button on the homepage.
-2. Fill in your details such as name, email, and password.
+2. Fill in your details, including name, email, and password.
 3. Click "Register" to create your account.
 
 ### Logging In
@@ -40,17 +40,17 @@ To start using the app, visit [www.eventcs.com](http://www.eventcs.com).
 
 The app includes the following main sections:
 
-**Home Page:** Welcome page with a hero section, search bar, and featured events.
+- **Home Page:** Welcome page featuring a hero section, search bar, and highlighted events.
   ![Home Page](images/both/home.png)
-**Events:** Browse and search for events.
-  ![Events Page](images/atendee/events.png)
-**Profile:** Manage user profile information.
+- **Events:** Browse and search for events.
+  ![Events Page](images/attendee/events.png)
+- **Profile:** Manage your user profile information.
   ![Profile Page](images/both/profileinfo.png)
-**Forums:** Participate in event-related discussions.
+- **Forums:** Participate in event-related discussions.
   ![Forums](images/both/forum.png)
-**People:** Search for and connect with other users.
+- **People:** Search for and connect with other users.
   ![People](images/both/people.png)
-**Chat:** Communicate with other users in real-time.
+- **Chat:** Communicate with other users in real-time.
   ![Chat](images/both/converse%202.PNG)
 
 ## 4. Managing Events
@@ -63,7 +63,7 @@ The app includes the following main sections:
 ### Registering for Events
 
 - Click on an event to view its details.
-- Click the "Register" button to register for the event.
+- Click the "Register" button to sign up for the event.
 
 ### Creating Events
 
@@ -76,13 +76,13 @@ The app includes the following main sections:
 ### Viewing Profile
 
 - Navigate to the "Profile" section from the navigation bar.
-- View your profile information including name, email, and registered events.
+- View your profile information, including your name, email, and registered events.
 
 ### Editing Profile
 
 - Click the "Edit Profile" button.
-- Update your profile information such as name, email, and profile picture.
-- Click the "Save" button to save the changes.
+- Update your profile information, such as name, email, and profile picture.
+- Click the "Save" button to save your changes.
 
 ## 6. Forums
 
@@ -147,8 +147,8 @@ The Event Management App includes the following features:
 
 ## 11. Contact Support
 
-If you encounter any issues or have any questions, please contact our hacker at https://web.facebook.com/rejicapoquian81.
+If you encounter any issues or have any questions, please contact our support team at [support@eventcs.com](mailto:support@eventcs.com).
 
-## Here are the images
+## Image Repository
 
 You can find all the images used in this documentation in the [image repository](https://github.com/rtcapoquian/front-end-User-Service/tree/main/images).
